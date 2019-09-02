@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "656309915949",
+    "firebase_url": "https://forum-7ec37.firebaseio.com",
+    "project_id": "forum-7ec37",
+    "storage_bucket": "forum-7ec37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656309915949:android:cf3d2446391d2a1c",
+        "android_client_info": {
+          "package_name": "com.naimur978.forum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656309915949-mhhjhte6a6hl6mvui8mi3jccoq7cc6mo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.naimur978.forum",
+            "certificate_hash": "2987a59fc059a11b900f20c66c548bcbe4a6f8f0"
+          }
+        },
+        {
+          "client_id": "656309915949-c50n2lvp40u6ohlv6arngfdfbfbpbm93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSyQD-EuSeGhQ_y8bs0gBgxSTbXVC57sE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656309915949-c50n2lvp40u6ohlv6arngfdfbfbpbm93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
