@@ -94,30 +94,32 @@
             android:layout_marginTop="58dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="116dp"
-            android:enabled="false"
             android:background="@color/btnRed"
+            android:enabled="false"
             android:text="Sign in"
+            android:textAllCaps="false"
             android:textColor="#50ffffff"
             android:textSize="20sp"
-            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.483"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_forgot_password" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_forgot_password"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="17dp"
             android:layout_height="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="21dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="or"
             android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@+id/tv_dont_have_an_account"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
 
@@ -126,7 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="Don't have and account ? Sign Up !"
             android:textColor="@color/colorAccent"
@@ -138,8 +140,8 @@
             android:id="@+id/divider"
             android:layout_width="100dp"
             android:layout_height="1dp"
-            android:layout_marginTop="33dp"
-            android:layout_marginEnd="223dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="232dp"
             android:background="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
@@ -148,8 +150,8 @@
             android:id="@+id/divider2"
             android:layout_width="100dp"
             android:layout_height="1dp"
-            android:layout_marginStart="224dp"
-            android:layout_marginTop="33dp"
+            android:layout_marginStart="232dp"
+            android:layout_marginTop="32dp"
             android:background="@color/colorAccent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
@@ -169,6 +171,22 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_password" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/googleLoginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="invisible"
+            android:textAlignment="center"
+            android:backgroundTint="@color/btnRed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

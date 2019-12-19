@@ -25,16 +25,24 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
+import static com.google.android.gms.auth.api.signin.GoogleSignIn.getClient;
 import static com.naimur978.forum.RegisterActivity.onResetPasswordFragment;
 
 
 public class SignInFragment extends Fragment {
-
 
     public SignInFragment() {
         // Required empty public constructor
@@ -53,6 +61,8 @@ public class SignInFragment extends Fragment {
     ProgressBar progressBar;
 
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,6 +77,8 @@ public class SignInFragment extends Fragment {
         signInBtn = view.findViewById(R.id.sign_in_btn);
         progressBar= view.findViewById(R.id.signin_progress_bar);
         forgotPassword = view.findViewById(R.id.sign_in_forgot_password);
+
+
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -140,6 +152,8 @@ public class SignInFragment extends Fragment {
                 checkEmailAndPassword();
             }
         });
+
+
     }
 
     //making sure syntax is right in their own way
@@ -160,6 +174,32 @@ public class SignInFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
+
+                                    //..................................................new
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                                    if(task.getResult().getAdditionalUserInfo().isNewUser()){
+                                        String email = user.getEmail();
+                                        String uid = user.getUid();
+
+                                        HashMap<Object, String> hashMap = new HashMap<>();//hashmap as a medium to store the data
+
+                                        hashMap.put("email",email);
+                                        hashMap.put("uid",uid);
+                                        hashMap.put("name","");
+                                        hashMap.put("onlineStatus","online");
+                                        hashMap.put("typingTo","noOne");
+                                        hashMap.put("phone","");
+                                        hashMap.put("image","");
+                                        hashMap.put("cover","");
+
+                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+                                        DatabaseReference reference = database.getReference("Users");
+                                        reference.child(uid).setValue(hashMap);
+                                    }
+                                    //..................................................new
+
                                     mainIntent();
                                 }else{
                                     String error = task.getException().getMessage();

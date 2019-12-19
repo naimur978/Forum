@@ -29,11 +29,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class SignUpFragment extends Fragment {
 
@@ -182,7 +184,7 @@ public class SignUpFragment extends Fragment {
         customErrorIcon.setBounds(0,0,customErrorIcon.getIntrinsicWidth(),customErrorIcon.getIntrinsicHeight());
 
         if(email.getText().toString().matches(emailPattern)){
-            if(password.getText().toString().equals(confirmPassword.getText().toString())){
+            if(password.getText().toString().equals(confirmPassword.getText().toString()) && password.getText().toString().length()>=8){
 
                 progressBar.setVisibility(View.VISIBLE);
                 signUpBtn.setEnabled(false);
@@ -194,16 +196,41 @@ public class SignUpFragment extends Fragment {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
 
-                                    Map<Object, String> userData = new HashMap<>();//hashmap as a medium of store the data
-                                    userData.put("fullname",fullname.getText().toString());
+                                    /*Map<Object, String> userData = new HashMap<>();//hashmap as a medium to store the data
+                                    userData.put("fullname",fullname.getText().toString());*/
+
+                                    //..................................................new
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                                    String email = user.getEmail();
+                                    String uid = user.getUid();
+
+                                    HashMap<Object, String> hashMap = new HashMap<>();//hashmap as a medium to store the data
+
+                                    hashMap.put("email",email);
+                                    hashMap.put("uid",uid);
+                                    hashMap.put("name",fullname.getText().toString());
+                                    hashMap.put("onlineStatus","online");
+                                    hashMap.put("typingTo","noOne");
+                                    hashMap.put("phone","");
+                                    hashMap.put("image","");
+                                    hashMap.put("cover","");
+
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+                                    DatabaseReference reference = database.getReference("Users");
+                                    reference.child(uid).setValue(hashMap);
+
+                                    //..................................................new
 
                                     firebaseFirestore.collection("USERS") //USERS is a folder
-                                            .add(userData)//CompleteListener to make the condition of if else
+                                            .add(hashMap)//CompleteListener to make the condition of if else
                                             .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                                     if(task.isSuccessful()){
-                                                        mainIntent();
+                                                        startActivity(new Intent(getActivity(), DashboardActivity.class));
+                                                        getActivity().finish();
                                                     }else {
                                                         String error = task.getException().getMessage();
                                                         Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();//here getActivity is the Register activity, which is sworn to contain 2 fragments
