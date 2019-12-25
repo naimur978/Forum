@@ -77,7 +77,8 @@ public class UsersFragment extends Fragment {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     ModelUsers modelUsers = ds.getValue(ModelUsers.class);
 
-                    if(!modelUsers.getUid().equals(fUser.getUid())){
+                    if(modelUsers.getUid()!=null && fUser.getUid()!=null &&
+                            !modelUsers.getUid().equals(fUser.getUid())){
                         usersList.add(modelUsers);
                     }
 
