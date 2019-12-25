@@ -121,7 +121,7 @@ public class DashboardActivity extends AppCompatActivity {
             editor.apply();
 
         }else{
-            startActivity(new Intent(DashboardActivity.this,MainActivity.class));
+            startActivity(new Intent(DashboardActivity.this,DashboardActivity.class));
             finish();
         }
     }

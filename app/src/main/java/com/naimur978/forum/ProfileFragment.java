@@ -2,7 +2,6 @@ package com.naimur978.forum;
 
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -14,7 +13,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -203,11 +201,11 @@ public class ProfileFragment extends Fragment {
                 if (i == 0){
                     pd.setMessage("Updating Profile Picture");
                     profileOrCoverPhoto ="image";
-                    showImagePicDialog();
+                    showImagePickDialog();
                 }else if (i == 1){
                     pd.setMessage("Updating Cover Photo");
                     profileOrCoverPhoto ="cover";
-                    showImagePicDialog();
+                    showImagePickDialog();
                 }else if (i == 2){
                     pd.setMessage("Updating Name");
                     showNamePhoneUpdateDialog("name");
@@ -277,7 +275,7 @@ public class ProfileFragment extends Fragment {
         builder.create().show();
     }
 
-    private void showImagePicDialog() {
+    private void showImagePickDialog() {
         String options[] = {"Camera","Gallery"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Pick Image From");
@@ -328,7 +326,7 @@ public class ProfileFragment extends Fragment {
 
             case STORAGE_REQUEST_CODE:{
                 if(grantResults.length>0){
-                    boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean writeStorageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
                     if( writeStorageAccepted){
                         pickFromGallery();
@@ -443,7 +441,7 @@ public class ProfileFragment extends Fragment {
         if(user != null){
             //mProfileTv.setText((user.getEmail()));
         }else{
-            startActivity(new Intent(getActivity(),MainActivity.class));
+            startActivity(new Intent(getActivity(),DashboardActivity.class));
             getActivity().finish();
         }
     }
@@ -468,6 +466,9 @@ public class ProfileFragment extends Fragment {
         if(id == R.id.action_logout){
             firebaseAuth.signOut();
             checkUserStatus();
+        }
+        if(id == R.id.action_add_post){
+            startActivity(new Intent(getActivity(),AddPostActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

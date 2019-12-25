@@ -135,7 +135,7 @@ public class UsersFragment extends Fragment {
         if(user != null){
             //mProfileTv.setText((user.getEmail()));
         }else{
-            startActivity(new Intent(getActivity(),MainActivity.class));
+            startActivity(new Intent(getActivity(),DashboardActivity.class));
             getActivity().finish();
         }
     }
@@ -151,6 +151,9 @@ public class UsersFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
+
+        //hide addpost icon from this fragment
+        menu.findItem(R.id.action_add_post).setVisible(false);
 
         //searchview
         MenuItem item = menu.findItem(R.id.action_search);
@@ -188,6 +191,7 @@ public class UsersFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //get item id
         int id = item.getItemId();
         if(id == R.id.action_logout){
             firebaseAuth.signOut();

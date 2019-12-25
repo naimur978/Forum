@@ -317,7 +317,7 @@ public class ChatActivity extends AppCompatActivity {
             //mProfileTv.setText((user.getEmail()));
             myUid = user.getUid();
         }else{
-            startActivity(new Intent(this,MainActivity.class));
+            startActivity(new Intent(this,DashboardActivity.class));
             finish();
         }
     }

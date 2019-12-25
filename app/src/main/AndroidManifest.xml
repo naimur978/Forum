@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name="androidx.multidex.MultiDexApplication"
@@ -15,9 +15,12 @@
         android:roundIcon="@mipmap/app_round_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChatActivity"
-            android:theme="@style/AppThemeNo"></activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".DemoActivity"></activity>
+        <activity android:name=".AddPostActivity"
+            android:label="Add New Post"/>
+        <activity
+            android:name=".ChatActivity"
+            android:theme="@style/AppThemeNo" />
         <activity android:name=".DashboardActivity" />
         <activity
             android:name=".RegisterActivity"
@@ -33,33 +36,26 @@
             </intent-filter>
         </activity>
 
-
-
-
-
-
-
-        <service android:name=".Notifications.FirebaseService"
+        <service
+            android:name=".Notifications.FirebaseService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_SERVICE"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_SERVICE" />
             </intent-filter>
         </service>
-
-        <service android:name=".Notifications.FirebaseMessaging"
+        <service
+            android:name=".Notifications.FirebaseMessaging"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-
-
-
-
-
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

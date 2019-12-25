@@ -174,7 +174,7 @@ public class SignUpFragment extends Fragment {
     }
 
     private void mainIntent(){
-        startActivity(new Intent(getActivity(),MainActivity.class));
+        startActivity(new Intent(getActivity(),DashboardActivity.class));
         getActivity().finish();
     }
 
