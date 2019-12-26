@@ -5,11 +5,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
-public class FirebaseService extends FirebaseInstanceIdService {
-    public void onTokenRefresh(){
-        super.onTokenRefresh();
+
+public class FirebaseService extends FirebaseMessagingService {
+    
+    public void onNewToken(String s){
+        super.onNewToken(s);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String tokenRefresh = FirebaseInstanceId.getInstance().getToken();
 

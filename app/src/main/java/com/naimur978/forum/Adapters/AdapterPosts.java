@@ -1,6 +1,8 @@
 package com.naimur978.forum.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,8 +19,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naimur978.forum.ChatActivity;
+import com.naimur978.forum.DemoActivity;
 import com.naimur978.forum.Models.ModelPost;
 import com.naimur978.forum.R;
+import com.naimur978.forum.ThereProfileActivity;
 import com.squareup.picasso.Picasso;
 
 
@@ -83,7 +88,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         }else{
             try{
                 Picasso.get().load(pImage)
-                        .placeholder(R.drawable.ic_default_img)
                         .into(holder.pImageIv);
             }catch (Exception e){
 
@@ -125,6 +129,33 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             }
         }));
 
+        holder.profileLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //alert dialog to choose chat or post
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setItems(new String[]{"Profile", "Chat"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(i==0){
+                            //profile clicked
+                            Intent intent = new Intent(context, ThereProfileActivity.class);
+                            intent.putExtra("uid",uid);
+                            context.startActivity(intent);
+                        }
+                        if(i==1){
+                            //chat clicked
+                            Intent intent = new Intent(context, ChatActivity.class);
+                            intent.putExtra("hisUid", uid);
+                            context.startActivity(intent);
+                        }
+                    }
+                });
+                builder.create().show();
+            }
+        });
+
     }
 
     @Override
@@ -138,6 +169,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         TextView uNameTv, pTimeTv, pTitleTv, pDescriptionTv, pLikesTv;
         ImageButton moreBtn;
         Button likeBtn, commentBtn, shareBtn;
+        LinearLayout profileLayout;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -153,6 +185,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             likeBtn = itemView.findViewById(R.id.likeBtn);
             commentBtn = itemView.findViewById(R.id.commentBtn);
             shareBtn = itemView.findViewById(R.id.shareBtn);
+            profileLayout = itemView.findViewById(R.id.profileLayout);
 
         }
     }

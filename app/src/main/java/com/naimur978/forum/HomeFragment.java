@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
 
         //recycler view
-        recyclerView = view.findViewById(R.id.postRecyclerView);
+        recyclerView = view.findViewById(R.id.postsRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         //show newest post first, for this load from last
         layoutManager.setStackFromEnd(true);

@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name="androidx.multidex.MultiDexApplication"
@@ -15,9 +14,10 @@
         android:roundIcon="@mipmap/app_round_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DemoActivity"></activity>
-        <activity android:name=".AddPostActivity"
-            android:label="Add New Post"/>
+        <activity android:name=".DemoActivity" />
+        <activity
+            android:name=".AddPostActivity"
+            android:label="Add New Post" />
         <activity
             android:name=".ChatActivity"
             android:theme="@style/AppThemeNo" />
@@ -35,6 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ThereProfileActivity"></activity>
+
+
 
         <service
             android:name=".Notifications.FirebaseService"

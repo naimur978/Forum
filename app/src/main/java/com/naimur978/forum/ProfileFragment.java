@@ -14,7 +14,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -28,6 +31,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,9 +49,13 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.naimur978.forum.Adapters.AdapterPosts;
+import com.naimur978.forum.Models.ModelPost;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static com.google.firebase.storage.FirebaseStorage.getInstance;
@@ -62,6 +70,7 @@ public class ProfileFragment extends Fragment {
     ImageView avatarIv, coverIv;
     TextView nameTv,emailTv, phoneTv;
     FloatingActionButton fab;
+    RecyclerView postsRecyclerView;
 
     ProgressDialog pd;
 
@@ -83,6 +92,10 @@ public class ProfileFragment extends Fragment {
     StorageReference storageReference;
     //path where images of user profile and cover will be stored
     String storagePath = "Users_Profile_Cover_Images/";
+
+    List<ModelPost> postList;
+    AdapterPosts adapterPosts;
+    String uid;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -112,6 +125,7 @@ public class ProfileFragment extends Fragment {
         phoneTv = view.findViewById(R.id.phoneTv);
         coverIv = view.findViewById(R.id.coverIv);
         fab = view.findViewById(R.id.fab);
+        postsRecyclerView = view.findViewById(R.id.recylerview_posts);
 
         //init progress dialog
         pd = new ProgressDialog(getActivity());
@@ -158,11 +172,95 @@ public class ProfileFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 showEditProfileDialog();
             }
         });
 
+        postList = new ArrayList<>();
+
+        checkUserStatus();
+        loadMyPosts();
+
         return view;
+    }
+
+    private void loadMyPosts() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        //show newest post first, for this load from last
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+
+        //set layout to recyclerview
+        postsRecyclerView.setLayoutManager(layoutManager);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+
+        Query query = ref.orderByChild("uid").equalTo(uid);
+        //get all data from this query
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                postList.clear();
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    ModelPost modelPost = ds.getValue(ModelPost.class);
+
+                    postList.add(modelPost);
+
+                    //adapter
+                    adapterPosts = new AdapterPosts(getActivity(), postList);
+                    //set adapter to reyclerview
+                    postsRecyclerView.setAdapter(adapterPosts);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void searchMyPosts(String searchQuery) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        //show newest post first, for this load from last
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+
+        //set layout to recyclerview
+        postsRecyclerView.setLayoutManager(layoutManager);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+
+        Query query = ref.orderByChild("uid").equalTo(uid);
+        //get all data from this query
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                postList.clear();
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    ModelPost modelPost = ds.getValue(ModelPost.class);
+
+                    //to search certain word from my posts
+                    if(modelPost.getpTitle().toLowerCase().contains(searchQuery.toLowerCase())||
+                            modelPost.getpDescr().toLowerCase().contains(searchQuery.toLowerCase())){
+                        postList.add(modelPost);
+                    }
+
+                    //adapter
+                    adapterPosts = new AdapterPosts(getActivity(), postList);
+                    //set adapter to reyclerview
+                    postsRecyclerView.setAdapter(adapterPosts);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     //permissions....................
@@ -257,6 +355,27 @@ public class ProfileFragment extends Fragment {
                             Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+
+                    //if user edit his name, also change it from hist posts
+                    if(key.equals("name")){
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                        Query query = ref.orderByChild("uid").equalTo(uid);
+                        query.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                                    String child = ds.getKey();
+                                    dataSnapshot.getRef().child(child).child("uName").setValue(value);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+
                 }
                 else{
                     Toast.makeText(getActivity(), "Please enter "+key, Toast.LENGTH_SHORT).show();
@@ -391,6 +510,27 @@ public class ProfileFragment extends Fragment {
 
                                         }
                                     });
+
+                            //if user edit his name, also change it from hist posts
+                            if(profileOrCoverPhoto.equals("image")){
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                                Query query = ref.orderByChild("uid").equalTo(uid);
+                                query.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot ds: dataSnapshot.getChildren()){
+                                            String child = ds.getKey();
+                                            dataSnapshot.getRef().child(child).child("uDp").setValue(downloadUri.toString());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+
                         }else{
                             pd.dismiss();
                             Toast.makeText(getActivity(), "Some error has occurred", Toast.LENGTH_SHORT).show();
@@ -440,6 +580,8 @@ public class ProfileFragment extends Fragment {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
             //mProfileTv.setText((user.getEmail()));
+            //if user is signed in
+            uid = user.getUid();
         }else{
             startActivity(new Intent(getActivity(),DashboardActivity.class));
             getActivity().finish();
@@ -457,6 +599,35 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+
+        //serach listener
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                //called when user press search
+                if(!TextUtils.isEmpty(s)){
+                    searchMyPosts(s);
+                }else {
+                    loadMyPosts();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                //called when user press any letter
+                if(!TextUtils.isEmpty(s)){
+                    searchMyPosts(s);
+                }else {
+                    loadMyPosts();
+                }
+                return false;
+            }
+        });
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 

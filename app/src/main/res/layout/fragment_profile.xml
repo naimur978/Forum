@@ -23,7 +23,8 @@
 
             </ImageView>
 
-                <LinearLayout
+            <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:orientation="horizontal"
@@ -80,6 +81,12 @@
 
                 </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recylerview_posts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/linearLayout" />
+
         </RelativeLayout>
 
     </ScrollView>
@@ -95,5 +102,6 @@
         android:layout_margin="10dp"
         android:layout_alignParentRight="true"
         />
+
 
 </RelativeLayout>
