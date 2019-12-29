@@ -25,12 +25,12 @@
             android:background="@drawable/editextstyle"
             android:padding="10dp"
             android:hint="Enter title"
-            android:fontFamily="@font/chewy"
+
             android:singleLine="true"/>
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/pImageIv"
             android:background="@color/colorPrimary"
             android:minHeight="200dp"/>
@@ -53,8 +53,9 @@
             android:id="@+id/pUploadBtn"
             style="@style/Widget.AppCompat.Button.Colored"
             android:text="Upload"
+            android:layout_marginTop="6dp"
             android:textColor="@color/colorPrimary"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             />
 
     </LinearLayout>

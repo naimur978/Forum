@@ -2,28 +2,43 @@ package com.naimur978.forum;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.auth.User;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.naimur978.forum.Notifications.Token;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
 
     String mUID;
+
+    private TextView mTextMessage;
+    BottomNavigationView navigation;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +50,56 @@ public class DashboardActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        BottomNavigationView navigationView = findViewById(R.id.navigation);
-        navigationView.setOnNavigationItemSelectedListener(selectedListener);
 
-        //default
-        //setTitle("Home");
-        HomeFragment fragment1 = new HomeFragment();
-        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-        ft1.replace(R.id.content, fragment1,"");
-        ft1.commit();
+        mTextMessage = (TextView) findViewById(R.id.message);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        viewPager = findViewById(R.id.viewPager);
+        setupViewPager(viewPager);
+
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.e("View Pager", "onPageSelected: "+position );
+                switch (position){
+                    case 0:
+                        navigation.setSelectedItemId(R.id.nav_home);
+                        break;
+                    case 1:
+                        navigation.setSelectedItemId(R.id.nav_profile);
+                        break;
+                    case 2:
+                        navigation.setSelectedItemId(R.id.nav_users);
+                        break;
+
+                    case 3:
+                        navigation.setSelectedItemId(R.id.nav_chat);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+
+
+
+
+
 
         checkUserStatus();
 
-        updateToken(FirebaseInstanceId.getInstance().getToken());
     }
 
     @Override
@@ -64,49 +116,28 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-    private BottomNavigationView.OnNavigationItemSelectedListener selectedListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                    switch (menuItem.getItemId()){
-                        case R.id.nav_home:
-                            //setTitle("Home");
-                            HomeFragment fragment1 = new HomeFragment();
-                            FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-                            ft1.replace(R.id.content, fragment1,"");
-                            ft1.commit();
-                            return true;
-
-                        case R.id.nav_profile:
-                            setTitle("Profile");
-                            ProfileFragment fragment2 = new ProfileFragment();
-                            FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
-                            ft2.replace(R.id.content, fragment2,"");
-                            ft2.commit();
-                            return true;
-
-                        case R.id.nav_users:
-                            setTitle("Users");
-                            UsersFragment fragment3 = new UsersFragment();
-                            FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
-                            ft3.replace(R.id.content, fragment3,"");
-                            ft3.commit();
-                            return true;
-
-                        case R.id.nav_chat:
-                            setTitle("Chats");
-                            ChatListFragment fragment4 = new ChatListFragment();
-                            FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction();
-                            ft4.replace(R.id.content, fragment4,"");
-                            ft4.commit();
-                            return true;
-                    }
-
-                    return false;
-                }
-            };
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.nav_home:
+                    viewPager.setCurrentItem(0);
+                    return true;
+                case R.id.nav_profile:
+                    viewPager.setCurrentItem(1);
+                    return true;
+                case R.id.nav_users:
+                    viewPager.setCurrentItem(2);
+                    return true;
+                case R.id.nav_chat:
+                    viewPager.setCurrentItem(3);
+                    return true;
+            }
+            return false;
+        }
+    };
 
     private void checkUserStatus(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -120,9 +151,53 @@ public class DashboardActivity extends AppCompatActivity {
             editor.putString("Current_USERID", mUID);
             editor.apply();
 
+            updateToken(FirebaseInstanceId.getInstance().getToken());
+
+
         }else{
             startActivity(new Intent(DashboardActivity.this,DashboardActivity.class));
             finish();
+        }
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new HomeFragment(), "Home");
+        adapter.addFragment(new ProfileFragment(), "Profile");
+        adapter.addFragment(new UsersFragment(), "Users");
+        adapter.addFragment(new ChatListFragment(), "Chat");
+
+        viewPager.setAdapter(adapter);
+    }
+
+
+
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
         }
     }
 

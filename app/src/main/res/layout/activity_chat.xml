@@ -69,6 +69,13 @@
         android:background="@color/colorAccent"
         android:gravity="center">
 
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/attachBtn"
+            android:background="@drawable/ic_attach_black"
+        />
+
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"

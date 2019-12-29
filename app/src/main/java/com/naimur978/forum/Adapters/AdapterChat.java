@@ -67,11 +67,26 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
     public void onBindViewHolder(@NonNull AdapterChat.MyHolder holder,final int position) {
         String message = chatList.get(position).getMessage();
         String timeStamp = chatList.get(position).getTimestamp();
+        String type = chatList.get(position).getType();
 
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         cal.setTimeInMillis(Long.parseLong(timeStamp));
         android.text.format.DateFormat df = new android.text.format.DateFormat();
         String dateTime = df.format("dd/MM/yyyy hh:mm aa", cal).toString();
+
+        if(type.equals("text")){
+            //text message
+            holder.messageTv.setVisibility(View.VISIBLE);
+            holder.messageIv.setVisibility(View.GONE);
+
+            holder.messageTv.setText(message);
+        }else {
+            //image message
+            holder.messageTv.setVisibility(View.GONE);
+            holder.messageIv.setVisibility(View.VISIBLE);
+
+            Picasso.get().load(message).placeholder(R.drawable.ic_image_black).into(holder.messageIv);
+        }
 
         //set data
         holder.messageTv.setText(message);
@@ -174,9 +189,9 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
         }
     }
 
-    class MyHolder extends RecyclerView.ViewHolder{
+    static class MyHolder extends RecyclerView.ViewHolder{
 
-        ImageView profileIv;
+        ImageView profileIv, messageIv;
         TextView messageTv, isSeenTv, timeTv;
 
         LinearLayout messageLayout; //to show delete option after clicking on any row chat
@@ -186,6 +201,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
 
             //item view
             profileIv = itemView.findViewById(R.id.profileIv);
+            messageIv = itemView.findViewById(R.id.messageIv);
             messageTv = itemView.findViewById(R.id.messageTv);
             isSeenTv = itemView.findViewById(R.id.isSeenTv);
             timeTv = itemView.findViewById(R.id.timeTv);

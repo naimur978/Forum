@@ -20,7 +20,7 @@ public class OreoAndAboveNotification extends ContextWrapper {
     public OreoAndAboveNotification(Context base) {
         super(base);
 
-        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.O){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             createChannel();
         }
     }

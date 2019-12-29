@@ -28,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.naimur978.forum.Adapters.AdapterPosts;
 import com.naimur978.forum.Models.ModelPost;
@@ -46,6 +47,8 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     List<ModelPost> postList;
     AdapterPosts adapterPosts;
+
+    String uid;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -106,9 +109,18 @@ public class HomeFragment extends Fragment {
     }
 
     private void searchPosts(String searchQuery){
-        //path of all posts
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        //show newest post first, for this load from last
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+
+        //set layout to recyclerview
+        recyclerView.setLayoutManager(layoutManager);
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
-        //get all data from this ref
+
+
+        //get all data from this query
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -116,14 +128,11 @@ public class HomeFragment extends Fragment {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     ModelPost modelPost = ds.getValue(ModelPost.class);
 
-                    //extra from load posts
-                    if(modelPost.getpTitle().toLowerCase().contains(searchQuery.toLowerCase()) ||
+                    //to search certain word from my posts
+                    if(modelPost.getpTitle().toLowerCase().contains(searchQuery.toLowerCase())||
                             modelPost.getpDescr().toLowerCase().contains(searchQuery.toLowerCase())){
                         postList.add(modelPost);
                     }
-                    //extra from load posts
-
-                    postList.add(modelPost);
 
                     //adapter
                     adapterPosts = new AdapterPosts(getActivity(), postList);
@@ -134,7 +143,6 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                //in case of error
                 Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -144,7 +152,7 @@ public class HomeFragment extends Fragment {
     private void checkUserStatus(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
-            //mProfileTv.setText((user.getEmail()));
+            //user is signed in
         }else{
             startActivity(new Intent(getActivity(),DashboardActivity.class));
             getActivity().finish();
@@ -182,6 +190,12 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String s) {
                 //called when user press any letter
+                //called when user press search
+                if(!TextUtils.isEmpty(s)){
+                    searchPosts(s);
+                }else {
+                    loadPosts();
+                }
                 return false;
             }
         });
@@ -197,8 +211,11 @@ public class HomeFragment extends Fragment {
             checkUserStatus();
         }
 
-        if(id == R.id.action_add_post){
+        else if(id == R.id.action_add_post){
             startActivity(new Intent(getActivity(),AddPostActivity.class));
+        }
+        else if(id == R.id.action_settings){
+            startActivity(new Intent(getActivity(), SettingsActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

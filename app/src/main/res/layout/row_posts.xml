@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="3dp"
-    app:cardElevation="3dp"
+    app:cardElevation="5dp"
+    android:fadingEdge="vertical"
     app:contentPadding="5dp"
     app:cardUseCompatPadding="true"
     app:cardBackgroundColor="@color/colorWhite"
@@ -63,14 +64,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/pTitleTv"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#2D2D30"
             android:text="Title"
             android:autoLink="all"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/pDescriptionTv"
+            android:layout_marginLeft="5dp"
             android:textColor="#000000"
             android:text="The description of the post"
             android:autoLink="all"
@@ -80,53 +84,70 @@
             android:layout_height="200dp"
             android:id="@+id/pImageIv"
             android:background="#ffffff"/>
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pLikesTv"
-            android:text="1.2k Likes"
-            android:textColor="@color/colorPrimary"/>
+            android:paddingBottom="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pLikesTv"
+                android:text="1.2k Likes"
+                android:paddingLeft="5dp"
+                android:layout_weight="1"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/pCommentsTv"
+                android:paddingRight="5dp"
+                android:textAlignment="textEnd"
+                android:text="1.2k Comments"
+                android:textColor="@color/colorPrimary"/>
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#f5f0f0"/>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
 
-            <Button
+            <ImageButton
                 android:id="@+id/likeBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="LIKE"
-                android:drawableLeft="@drawable/ic_like_black"
-                android:drawablePadding="5dp"
-                android:drawableStart="@drawable/ic_like_black"
-                android:background="@color/colorWhite"/>
-            <Button
+                android:paddingTop="5dp"
+                android:background="@drawable/btn_feed_action"
+                android:src="@drawable/like" />
+
+            <ImageButton
                 android:id="@+id/commentBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
                 android:layout_weight="1"
-                android:text="COMMENT"
-                android:drawableLeft="@drawable/ic_comment_black"
-                android:drawablePadding="5dp"
-                android:drawableStart="@drawable/ic_comment_black"
-                android:background="@color/colorWhite"/>
-            <Button
+                android:layout_height="48dp"
+                android:background="@drawable/btn_feed_action"
+                android:src="@drawable/comment" />
+
+            <ImageButton
                 android:id="@+id/shareBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="SHARE"
-                android:drawableLeft="@drawable/ic_share_black"
-                android:drawablePadding="5dp"
-                android:drawableStart="@drawable/ic_share_black"
-                android:background="@color/colorWhite"/>
+                android:background="@drawable/btn_feed_action"
+                android:src="@drawable/share" />
         </LinearLayout>
+
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

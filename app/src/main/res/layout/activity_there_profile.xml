@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f1eded"
     tools:context=".ThereProfileActivity">
 
@@ -12,11 +13,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <include
                 layout="@layout/custom_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"/>
+
 
 
             <ImageView

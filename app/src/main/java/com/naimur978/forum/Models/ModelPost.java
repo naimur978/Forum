@@ -1,14 +1,17 @@
 package com.naimur978.forum.Models;
 
 public class ModelPost {
-    String pId, pTitle, pDescr, pImage, pTime, uid, uEmail, uDp, uName;
+    String pId, pTitle, pDescr, pLikes, pComments, pImage, pTime, uid, uEmail, uDp, uName;
 
     public ModelPost(){}
 
-    public ModelPost(String pId, String pTitle, String pDescr, String pImage, String pTime, String uid, String uEmail, String uDp, String uName) {
+    public ModelPost(String pId, String pTitle, String pDescr, String pLikes, String pComments,
+                     String pImage, String pTime, String uid, String uEmail, String uDp, String uName) {
         this.pId = pId;
         this.pTitle = pTitle;
         this.pDescr = pDescr;
+        this.pLikes = pLikes;
+        this.pComments = pComments;
         this.pImage = pImage;
         this.pTime = pTime;
         this.uid = uid;
@@ -39,6 +42,22 @@ public class ModelPost {
 
     public void setpDescr(String pDescr) {
         this.pDescr = pDescr;
+    }
+
+    public String getpLikes() {
+        return pLikes;
+    }
+
+    public void setpLikes(String pLikes) {
+        this.pLikes = pLikes;
+    }
+
+    public String getpComments() {
+        return pComments;
+    }
+
+    public void setpComments(String pComments) {
+        this.pComments = pComments;
     }
 
     public String getpImage() {

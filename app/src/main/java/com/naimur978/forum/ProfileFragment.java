@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
+import android.renderscript.Sampler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -374,6 +375,41 @@ public class ProfileFragment extends Fragment {
 
                             }
                         });
+
+                        //update name in current users comments on posts
+                        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                                    String child = ds.getKey();
+                                    if(dataSnapshot.child(child).hasChild("Comments")){
+                                        String child1 = ""+dataSnapshot.child(child).getKey();
+                                        Query child2 = FirebaseDatabase.getInstance().getReference("Posts")
+                                                .child(child1).child("Comments").orderByChild("uid").equalTo(uid);
+
+                                        child2.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                                                    String child = ds.getKey();
+                                                    dataSnapshot.getRef().child(child).child("uName").setValue(value);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                     }
 
                 }
@@ -529,6 +565,44 @@ public class ProfileFragment extends Fragment {
 
                                     }
                                 });
+
+                                //update user image in current users comments on posts
+
+                                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for(DataSnapshot ds: dataSnapshot.getChildren()){
+                                            String child = ds.getKey();
+                                            if(dataSnapshot.child(child).hasChild("Comments")){
+                                                String child1 = ""+dataSnapshot.child(child).getKey();
+                                                Query child2 = FirebaseDatabase.getInstance().getReference("Posts")
+                                                        .child(child1).child("Comments").orderByChild("uid").equalTo(uid);
+
+                                                child2.addValueEventListener(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        for(DataSnapshot ds: dataSnapshot.getChildren()){
+                                                            String child = ds.getKey();
+                                                            dataSnapshot.getRef().child(child).child("uDp").setValue(downloadUri.toString());
+
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
                             }
 
                         }else{
@@ -638,8 +712,11 @@ public class ProfileFragment extends Fragment {
             firebaseAuth.signOut();
             checkUserStatus();
         }
-        if(id == R.id.action_add_post){
+        else if(id == R.id.action_add_post){
             startActivity(new Intent(getActivity(),AddPostActivity.class));
+        }
+        else if(id == R.id.action_settings){
+            startActivity(new Intent(getActivity(), SettingsActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
