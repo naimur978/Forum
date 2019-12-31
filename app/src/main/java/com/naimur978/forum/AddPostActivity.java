@@ -104,13 +104,13 @@ public class AddPostActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);*/
 
-       Toolbar toolbar = findViewById(R.id.main_toolbar);
-       TextView toolbarTitle = findViewById(R.id.titleText);
-       TextView toolbarCounter = findViewById(R.id.titleCounter);
-       //toolbar.setTitle("Add New Post");
-       toolbarTitle.setText("Add New Post");
-       //toolbarCounter.setText("2");
-       setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.main_toolbar);
+        TextView toolbarTitle = findViewById(R.id.titleText);
+        TextView toolbarCounter = findViewById(R.id.titleCounter);
+        //toolbar.setTitle("Add New Post");
+        toolbarTitle.setText("Add New Post");
+        //toolbarCounter.setText("2");
+        setSupportActionBar(toolbar);
 
 
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -485,7 +485,7 @@ public class AddPostActivity extends AppCompatActivity {
             Bitmap bitmap = ((BitmapDrawable)imageIv.getDrawable()).getBitmap();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] data = baos.toByteArray();
 
             //post with image
