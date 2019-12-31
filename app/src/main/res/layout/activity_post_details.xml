@@ -196,44 +196,50 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/commentsLayout"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
         android:layout_alignParentBottom="true">
+
 
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/cAvatarIv"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/ic_default_img"/>
 
         <EditText
             android:id="@+id/commentEt"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/cAvatarIv"
-            android:layout_toStartOf="@id/sendBtn"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:background="@color/colorWhite"
-            android:layout_centerVertical="true"
             android:hint="Enter comment here..."
             android:inputType="textMultiLine|textCapSentences"
             android:padding="10dp"
-            android:layout_margin="1dp"
-            android:layout_toRightOf="@id/cAvatarIv"
-            android:layout_toLeftOf="@id/sendBtn"/>
+            android:maxHeight="100dp"
+            android:minHeight="50dp"
+            />
 
-
-        <ImageButton
+        <Button
+            android:id="@+id/sendBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/sendBtn"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_send"
-            android:background="@color/colorWhite"
-            android:layout_alignParentRight="true"/>
+            android:layout_gravity="center_vertical"
+            android:layout_margin="8dp"
+            android:background="@drawable/send_comment_button_bg"
+            android:minWidth="0dp"
+            android:enabled="true"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Send"
+            android:textColor="@android:color/white" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

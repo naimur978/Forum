@@ -64,11 +64,11 @@ public class PostDetailsActivity extends AppCompatActivity {
     ImageView uPictureIv, pImageIv;
     TextView uNameTv, pTimeTv, pTitleTv, pDescriptionTv, pLikesTv, pCommentsTv;
     ImageButton moreBtn;
-    Button likeBtn, shareBtn;
+    ImageButton likeBtn, shareBtn;
     LinearLayout profileLayout;
 
     EditText commentEt;
-    ImageButton sendBtn;
+    Button sendBtn;
     ImageView cAvatarIv;
 
     ProgressDialog pd;
@@ -358,12 +358,20 @@ public class PostDetailsActivity extends AppCompatActivity {
                 if(dataSnapshot.child(postId).hasChild(myUid)){
                     //user has liked this post, so notify it by showing
                     //"liked" instead of "like"
-                    likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like,0,0,0);
-                    likeBtn.setText("Liked");
+
+                    /*likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like,0,0,0);
+                    likeBtn.setText("Liked");*/
+
+                    likeBtn.setImageResource(R.drawable.liked);
+
                 }else{
                     //user has not liked this post yet
-                    likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like_black,0,0,0);
-                    likeBtn.setText("Like");
+
+                    /*likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like_black,0,0,0);
+                    likeBtn.setText("Like");*/
+
+                    likeBtn.setImageResource(R.drawable.like);
+
                 }
             }
 

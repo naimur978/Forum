@@ -6,6 +6,11 @@
     <color name="btnRed">#A55055</color>
     <color name="successGreen">#11A10C</color>
     <color name="colorWhite">#FFFFFF</color>
+
+
     <color name="facebook_button_color">#3b5999</color>
     <color name="facebook_button_color_pressed">#2f477a</color>
+    <color name="send_comment_button_activated">#0097d3</color>
+    <color name="send_comment_button_deactivated">#7fcbe9</color>
+
 </resources>
