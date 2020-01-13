@@ -20,7 +20,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="500dp"
             android:id="@+id/pImageIv"
             android:background="@mipmap/ic_stub"
             android:minHeight="400dp"/>
@@ -54,6 +54,7 @@
             android:layout_marginTop="6dp"
             android:textColor="@color/colorPrimary"
             android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             />
 
     </LinearLayout>

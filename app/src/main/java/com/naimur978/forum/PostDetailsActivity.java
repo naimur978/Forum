@@ -430,38 +430,61 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         String timeStamp = String.valueOf(System.currentTimeMillis());
 
+
+
+
+
+
         //each post will have a child "comment"
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("Comments");
 
-        HashMap<String, Object> hashMap = new HashMap<>();
 
-        hashMap.put("cId", timeStamp);
-        hashMap.put("comment", comment);
-        hashMap.put("timestamp", timeStamp);
-        hashMap.put("uid", myUid);
-        hashMap.put("uEmail", myEmail);
-        hashMap.put("uDp", myDp);
-        hashMap.put("uName", myName);
-        hashMap.put("pComments", "0");
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("Comments");
 
-        //put this data in db
-        ref.child(timeStamp).setValue(hashMap)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        pd.dismiss();
-                        Toast.makeText(PostDetailsActivity.this, "Comment Added...", Toast.LENGTH_SHORT).show();
-                        commentEt.setText("");
-                        updateCommentCount();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        pd.dismiss();
-                        Toast.makeText(PostDetailsActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    HashMap<String, Object> hashMap = new HashMap<>();
+
+                    hashMap.put("cId", timeStamp);
+                    hashMap.put("comment", comment);
+                    hashMap.put("timestamp", timeStamp);
+                    hashMap.put("uid", myUid);
+                    hashMap.put("uEmail", myEmail);
+                    hashMap.put("uDp", myDp);
+                    /*hashMap.put("uName", myName);*/
+                    hashMap.put("uName", myName);
+                    hashMap.put("pComments", "0");
+
+                    //put this data in db
+                    ref.child(timeStamp).setValue(hashMap)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    pd.dismiss();
+                                    Toast.makeText(PostDetailsActivity.this, "Comment Added...", Toast.LENGTH_SHORT).show();
+                                    commentEt.setText("");
+                                    updateCommentCount();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    pd.dismiss();
+                                    Toast.makeText(PostDetailsActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
@@ -489,14 +512,14 @@ public class PostDetailsActivity extends AppCompatActivity {
     }
 
     private void loadUserInfo() {
-        Query myRef = FirebaseDatabase.getInstance().getReference("Users");
+        /*Query myRef = FirebaseDatabase.getInstance().getReference("Users");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     myName = ""+ds.child("name").getValue();
                     myDp = ""+ds.child("image").getValue();
-
+                    Toast.makeText(PostDetailsActivity.this, ""+myName, Toast.LENGTH_SHORT).show();
 
 
                     try{
@@ -512,7 +535,31 @@ public class PostDetailsActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+        });*/
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userid = user.getUid();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                myName = dataSnapshot.child("name").getValue().toString();
+                myDp = ""+dataSnapshot.child("image").getValue();
+
+                Picasso.get().load(myDp).into(cAvatarIv);
+                //Toast.makeText(PostDetailsActivity.this, ""+myName, Toast.LENGTH_SHORT).show();
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
         });
+
     }
 
     private void loadPostInfo() {

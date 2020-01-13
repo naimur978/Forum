@@ -169,9 +169,8 @@ public class AddPostActivity extends AppCompatActivity {
 
 
 
+        pd = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
 
-
-        pd = new ProgressDialog(this);
 
         imageIv.setOnClickListener(new View.OnClickListener() {
             @Override
