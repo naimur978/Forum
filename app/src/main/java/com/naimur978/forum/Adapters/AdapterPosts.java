@@ -29,6 +29,7 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -116,7 +117,13 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
         //set user dp
         try{
-            Picasso.get().load(uDp)
+            /*Picasso.get().load(uDp)
+                    .placeholder(R.drawable.ic_default_img)
+                    .into(holder.uPictureIv);*/
+            Glide
+                    .with(context)
+                    .load(uDp)
+                    .centerCrop()
                     .placeholder(R.drawable.ic_default_img)
                     .into(holder.uPictureIv);
         }catch (Exception e){
@@ -133,7 +140,12 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             holder.pImageIv.setVisibility(View.VISIBLE);
 
                 try{
-                    Picasso.get().load(pImage)
+                    /*Picasso.get().load(pImage)
+                            .into(holder.pImageIv);*/
+                    Glide
+                            .with(context)
+                            .load(pImage)
+                            .centerCrop()
                             .into(holder.pImageIv);
                 }catch (Exception e){
 

@@ -31,10 +31,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.naimur978.forum.Adapters.AdapterPosts;
+import com.naimur978.forum.Adapters.RecyclerViewAdapter;
 import com.naimur978.forum.Models.ModelPost;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static androidx.recyclerview.widget.LinearLayoutManager.*;
 
 
 /**
@@ -48,7 +51,8 @@ public class HomeFragment extends Fragment {
     List<ModelPost> postList;
     AdapterPosts adapterPosts;
 
-    String uid;
+    private ArrayList<String> ImageUrls = new ArrayList<>();
+    private ArrayList<String> ImageNames = new ArrayList<>();
 
     public HomeFragment() {
         // Required empty public constructor
@@ -61,6 +65,33 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
         firebaseAuth = FirebaseAuth.getInstance();
+
+
+        //////////////////////////
+        ImageUrls.add("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/qbt7uzcjer5y43gpvs0f");
+        ImageNames.add("Happy Vinayaka");
+
+        ImageUrls.add("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/nznuygntaetleyakn42l");
+        ImageNames.add("Restaurants");
+
+        ImageUrls.add("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/zf0qg2lfynoq6w46itrf");
+        ImageNames.add("Hot Dogs");
+
+        ImageUrls.add("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/la7ilaaeh7lecjv8nvsq");
+        ImageNames.add("Pani Puri");
+
+        ImageUrls.add("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/qbt7uzcjer5y43gpvs0f");
+        ImageNames.add("KFC Chicken");
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView2 = view.findViewById(R.id.recyclerview);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(ImageUrls, ImageNames, getActivity());
+        recyclerView2.setAdapter(adapter);
+        recyclerView2.setLayoutManager(linearLayoutManager);
+
+
+        //////////////////////////////////////////////////////////
+
 
         //recycler view
         recyclerView = view.findViewById(R.id.postsRecyclerView);
@@ -79,6 +110,8 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+
 
     private void loadPosts() {
         //path of all posts

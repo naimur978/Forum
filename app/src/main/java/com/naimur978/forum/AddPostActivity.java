@@ -40,6 +40,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -453,7 +454,12 @@ public class AddPostActivity extends AppCompatActivity {
                     //setimage
                     if(!editImage.equals("noImage")){
                         try{
-                            Picasso.get().load(editImage).into(imageIv);
+                            /*Picasso.get().load(editImage).into(imageIv);*/
+                            Glide
+                                    .with(AddPostActivity.this)
+                                    .load(editImage)
+                                    .centerCrop()
+                                    .into(imageIv);
                         }
                         catch(Exception e){
 
