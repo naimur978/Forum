@@ -1,10 +1,13 @@
 package com.naimur978.forum.BloodDonationMap;
 
+import android.view.View;
+
 /**
  * Created by root on 11/6/16.
  */
 
 public class Donor {
+    String uid;
     String name;
     String contuctNumber;
     String city;
@@ -32,13 +35,22 @@ public class Donor {
 
     }
 
-    public Donor(String name, String contuctNumber, String bloodGroup, String city, String lat, String lng) {
+    public Donor(String uid, String name, String contuctNumber, String bloodGroup, String city, String lat, String lng) {
+        this.uid = uid;
         this.name = name;
         this.contuctNumber = contuctNumber;
         this.bloodGroup = bloodGroup;
         this.city = city;
         this.lat = lat;
         this.lan = lng;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getName() {

@@ -2,10 +2,13 @@ package com.naimur978.forum.BloodDonationMap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,7 +18,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.naimur978.forum.ChatActivity;
 import com.naimur978.forum.R;
+import com.naimur978.forum.ThereProfileActivity;
 
 import java.util.ArrayList;
 
@@ -45,6 +50,42 @@ public class DonorList extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, donorList);
         listView.setAdapter(arrayAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int p, long l) {
+                for(int i=0; i<DonorList.donorInfo.size(); i++){
+                    final String uid = DonorList.donorInfo.get(i).getUid();
+                    //alert dialog to choose chat or post
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DonorList.this);
+                    builder.setItems(new String[]{"Profile", "Chat"}, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if(i==0){
+                                //profile clicked
+                                Intent intent = new Intent(DonorList.this, ThereProfileActivity.class);
+                                intent.putExtra("uid",uid);
+                                DonorList.this.startActivity(intent);
+                            }
+                            if(i==1){
+                                //chat clicked
+                                Intent intent = new Intent(DonorList.this, ChatActivity.class);
+                                intent.putExtra("hisUid", uid);
+                                DonorList.this.startActivity(intent);
+                            }
+                        }
+                    });
+                    builder.create().show();
+                }
+            }
+        });
+
+
+
+
+
+
+
+
         buttonMap = (Button) findViewById(R.id.Button_mapShow);
         buttonMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +105,8 @@ public class DonorList extends AppCompatActivity {
                 String donorInfo = donor.name + "   \n" + donor.contuctNumber;
                 donorList.add(donorInfo);
                 arrayAdapter.notifyDataSetChanged();
+
+
             }
 
             @Override

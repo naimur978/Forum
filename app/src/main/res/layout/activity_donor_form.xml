@@ -48,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
-            <EditText
+            <TextView
                 android:background="@drawable/input_background"
                 android:padding="5dp"
                 android:id="@+id/edt_name"

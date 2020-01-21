@@ -549,7 +549,6 @@ public class PostDetailsActivity extends AppCompatActivity {
                 myDp = ""+dataSnapshot.child("image").getValue();
 
                 Picasso.get().load(myDp).into(cAvatarIv);
-                //Toast.makeText(PostDetailsActivity.this, ""+myName, Toast.LENGTH_SHORT).show();
             }
 
 
