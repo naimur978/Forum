@@ -18,10 +18,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.amsen.par.searchview.AutoCompleteSearchView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,12 +34,14 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.naimur978.forum.Adapters.AdapterPosts;
 import com.naimur978.forum.Adapters.RecyclerViewAdapter;
+import com.naimur978.forum.BloodDonationMap.FirstPageActivity;
 import com.naimur978.forum.Models.ModelPost;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static androidx.recyclerview.widget.LinearLayoutManager.*;
+
 
 
 /**
@@ -51,8 +55,7 @@ public class HomeFragment extends Fragment {
     List<ModelPost> postList;
     AdapterPosts adapterPosts;
 
-    private ArrayList<String> ImageUrls = new ArrayList<>();
-    private ArrayList<String> ImageNames = new ArrayList<>();
+    private Button btnDonation;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -68,27 +71,14 @@ public class HomeFragment extends Fragment {
 
 
         //////////////////////////
-        ImageUrls.add("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/qbt7uzcjer5y43gpvs0f");
-        ImageNames.add("Happy Vinayaka");
 
-        ImageUrls.add("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/nznuygntaetleyakn42l");
-        ImageNames.add("Restaurants");
-
-        ImageUrls.add("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/zf0qg2lfynoq6w46itrf");
-        ImageNames.add("Hot Dogs");
-
-        ImageUrls.add("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/la7ilaaeh7lecjv8nvsq");
-        ImageNames.add("Pani Puri");
-
-        ImageUrls.add("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/qbt7uzcjer5y43gpvs0f");
-        ImageNames.add("KFC Chicken");
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView2 = view.findViewById(R.id.recyclerview);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(ImageUrls, ImageNames, getActivity());
-        recyclerView2.setAdapter(adapter);
-        recyclerView2.setLayoutManager(linearLayoutManager);
-
+        btnDonation = view.findViewById(R.id.btn_donation);
+        btnDonation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), FirstPageActivity.class));
+            }
+        });
 
         //////////////////////////////////////////////////////////
 
@@ -179,6 +169,8 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 
 
@@ -206,6 +198,12 @@ public class HomeFragment extends Fragment {
 
         MenuItem item = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+
+
+
+
+
+
 
         //serach listener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

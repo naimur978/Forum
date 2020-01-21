@@ -1,13 +1,13 @@
 package com.naimur978.forum;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
+
 
 import android.Manifest;
 import android.app.ActionBar;
@@ -22,6 +22,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -61,10 +62,14 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
+
 import java.io.ByteArrayOutputStream;
+
 import java.util.HashMap;
 import java.util.Map;
+
+
+
 
 public class AddPostActivity extends AppCompatActivity {
 
@@ -93,6 +98,8 @@ public class AddPostActivity extends AppCompatActivity {
     ProgressDialog pd;
 
     String editTitle, editDescription, editImage;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -277,12 +284,18 @@ public class AddPostActivity extends AppCompatActivity {
                         String timeStamp = String.valueOf(System.currentTimeMillis());
                         String filePathAndName = "Posts/"+"post_"+timeStamp;
 
+
+
                         //get image from imageview
                         Bitmap bitmap = ((BitmapDrawable)imageIv.getDrawable()).getBitmap();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
                         byte[] data = baos.toByteArray();
+
+
+
+
+
 
                         StorageReference ref = FirebaseStorage.getInstance().getReference().child(filePathAndName);
                         ref.putBytes(data)
@@ -370,7 +383,7 @@ public class AddPostActivity extends AppCompatActivity {
         Bitmap bitmap = ((BitmapDrawable)imageIv.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
         byte[] data = baos.toByteArray();
 
         StorageReference ref = FirebaseStorage.getInstance().getReference().child(filePathAndName);
@@ -490,7 +503,10 @@ public class AddPostActivity extends AppCompatActivity {
             Bitmap bitmap = ((BitmapDrawable)imageIv.getDrawable()).getBitmap();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
             byte[] data = baos.toByteArray();
 
             //post with image
