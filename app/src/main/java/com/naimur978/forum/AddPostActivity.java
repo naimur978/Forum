@@ -838,7 +838,7 @@ public class AddPostActivity extends AppCompatActivity {
             email = user.getEmail();
             uid = user.getUid();
         }else{
-            startActivity(new Intent(this,DashboardActivity.class));
+            startActivity(new Intent(this,SettingsActivity.class));
             finish();
         }
     }
@@ -851,6 +851,7 @@ public class AddPostActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
         getMenuInflater().inflate(R.menu.menu_main,menu);
 
         menu.findItem(R.id.action_add_post).setVisible(false);
@@ -863,10 +864,7 @@ public class AddPostActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //get item id
         int id = item.getItemId();
-        if(id == R.id.action_logout){
-            firebaseAuth.signOut();
-            checkUserStatus();
-        }
+
 
         return super.onOptionsItemSelected(item);
     }

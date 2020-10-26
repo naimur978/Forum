@@ -672,6 +672,7 @@ public class ProfileFragment extends Fragment {
     //inflate options menu
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_main, menu);
 
         MenuItem item = menu.findItem(R.id.action_search);
@@ -708,16 +709,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_logout){
-            firebaseAuth.signOut();
-            checkUserStatus();
-        }
-        else if(id == R.id.action_add_post){
+
+        if(id == R.id.action_add_post){
             startActivity(new Intent(getActivity(),AddPostActivity.class));
         }
-        else if(id == R.id.action_settings){
-            startActivity(new Intent(getActivity(), SettingsActivity.class));
-        }
+
         return super.onOptionsItemSelected(item);
     }
 }

@@ -653,6 +653,7 @@ public class PostDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         /*MenuItem item = menu.findItem(R.id.action_search);
@@ -686,10 +687,6 @@ public class PostDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_logout){
-            FirebaseAuth.getInstance().signOut();
-            checkUserStatus();
-        }
 
         return super.onOptionsItemSelected(item);
     }

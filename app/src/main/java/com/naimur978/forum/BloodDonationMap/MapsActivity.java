@@ -2,6 +2,7 @@ package com.naimur978.forum.BloodDonationMap;
 
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 
+import com.fivemin.chief.nonetworklibrary.networkBroadcast.NoNet;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,14 +35,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static Double lat=0.0;
     public static Double lng=0.0;
 
+    private FragmentManager fm = null;
+    private NoNet mNoNet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        fm = getSupportFragmentManager();
+        mNoNet = new NoNet();
+        mNoNet.initNoNet(this, fm);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    protected void onResume() {
+        mNoNet.RegisterNoNet();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        mNoNet.unRegisterNoNet();
+        super.onPause();
     }
 
 

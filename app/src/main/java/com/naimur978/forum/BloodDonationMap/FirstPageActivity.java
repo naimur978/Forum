@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.fivemin.chief.nonetworklibrary.networkBroadcast.NoNet;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -46,10 +48,17 @@ public class FirstPageActivity extends AppCompatActivity implements GoogleApiCli
     LocationManager locationManager;
     LocationListener locationListener;
 
+    private FragmentManager fm = null;
+    private NoNet mNoNet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
+
+        fm = getSupportFragmentManager();
+        mNoNet = new NoNet();
+        mNoNet.initNoNet(this, fm);
 
         // Connecting to the database
         FirebaseApp.initializeApp(this);
@@ -161,6 +170,18 @@ public class FirstPageActivity extends AppCompatActivity implements GoogleApiCli
 
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        mNoNet.RegisterNoNet();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        mNoNet.unRegisterNoNet();
+        super.onPause();
     }
 
     protected void onStart() {

@@ -15,7 +15,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    SwitchCompat postSwitch;
+
 
     //use shared preferences to save the state of switch
     SharedPreferences sp;
@@ -29,38 +29,16 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        postSwitch = findViewById(R.id.action_settings);
+
 
         //init sp
         sp = getSharedPreferences("Notification_SP", MODE_PRIVATE);
         boolean isPostEnabled = sp.getBoolean("" + TOPIC_POST_NOTIFICATION, false);
 
 
-        //if enabled check switch, otherwise uncheck switch - by default unchecked
-        if (isPostEnabled) {
-            postSwitch.setChecked(true);
-        } else {
-            postSwitch.setChecked(false);
-        }
 
-        //implement switch change listener
-        postSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
-                //edit switch state
-                editor = sp.edit();
-                editor.putBoolean("" + TOPIC_POST_NOTIFICATION, b);
-                editor.apply();
 
-                if (b) {
-                    subscribePostNotification(); //call to subscribe
-                } else {
-                    unsubscribePostNotification(); //call to unsubscribe
-
-                }
-            }
-        });
     }
 
     private void subscribePostNotification() {

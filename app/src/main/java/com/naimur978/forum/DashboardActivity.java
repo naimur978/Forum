@@ -9,28 +9,37 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import com.fivemin.chief.nonetworklibrary.networkBroadcast.NoNet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.auth.User;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.naimur978.forum.BloodDonationMap.FirstPageActivity;
+import com.naimur978.forum.CustomDrawer.DrawMenuAdapter;
 import com.naimur978.forum.Notifications.Token;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class DashboardActivity extends AppCompatActivity {
+import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
+import nl.psdcompany.duonavigationdrawer.views.DuoMenuView;
+import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
+
+public class DashboardActivity extends AppCompatActivity implements DuoMenuView.OnMenuClickListener{
 
     FirebaseAuth firebaseAuth;
 
@@ -40,13 +49,24 @@ public class DashboardActivity extends AppCompatActivity {
     BottomNavigationView navigation;
     ViewPager viewPager;
 
+
+    private DrawMenuAdapter mMenuAdapter;
+    private ViewHolder mViewHolder;
+
+    private ArrayList<String> mTitles = new ArrayList<>();
+
+    private FragmentManager fm = null;
+    private NoNet mNoNet;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
+        fm = getSupportFragmentManager();
+        mNoNet = new NoNet();
+        mNoNet.initNoNet(this, fm);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -92,21 +112,98 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
         checkUserStatus();
 
+
+
+
+        mTitles = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.menuOptions)));
+
+
+        // Initialize the views
+        mViewHolder = new ViewHolder();
+
+        // Handle toolbar actions
+        handleToolbar();
+
+        // Handle menu actions
+        handleMenu();
+
+        // Handle drawer actions
+        handleDrawer();
+
+        // Show main fragment in container
+        goToFragment(new HomeFragment(), false);
+        mMenuAdapter.setViewSelected(0, true);
+        setTitle(mTitles.get(0));
+
     }
+
+    private void handleToolbar() {
+        setSupportActionBar(mViewHolder.mToolbar);
+    }
+
+    private void handleDrawer() {
+        DuoDrawerToggle duoDrawerToggle = new DuoDrawerToggle(this,
+                mViewHolder.mDuoDrawerLayout,
+                mViewHolder.mToolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+
+        mViewHolder.mDuoDrawerLayout.setDrawerListener(duoDrawerToggle);
+        duoDrawerToggle.syncState();
+
+    }
+
+    private void handleMenu() {
+        mMenuAdapter = new DrawMenuAdapter(mTitles);
+
+        mViewHolder.mDuoMenuView.setOnMenuClickListener(this);
+        mViewHolder.mDuoMenuView.setAdapter(mMenuAdapter);
+    }
+
+    private void goToFragment(Fragment fragment, boolean addToBackStack) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        if (addToBackStack) {
+            transaction.addToBackStack(null);
+        }
+
+        transaction.add(R.id.viewPager, fragment).commit();
+    }
+
+    @Override
+    public void onOptionClicked(int position, Object objectClicked) {
+
+
+
+
+        // Navigate to the right fragment
+        switch (position) {
+            case 4:
+                startActivity(new Intent(this, FirstPageActivity.class));
+                break;
+
+
+        }
+
+        // Close the drawer
+        mViewHolder.mDuoDrawerLayout.closeDrawer();
+    }
+
+
 
     @Override
     protected void onResume() {
         checkUserStatus();
+        mNoNet.RegisterNoNet();
         super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        mNoNet.unRegisterNoNet();
+        super.onPause();
     }
 
     //add token for notification
@@ -116,6 +213,23 @@ public class DashboardActivity extends AppCompatActivity {
         ref.child(mUID).setValue(mToken);
 
     }
+
+    @Override
+    public void onFooterClicked() {
+
+
+            firebaseAuth.signOut();
+
+            startActivity(new Intent(DashboardActivity.this,RegisterActivity.class));
+            finish();
+
+    }
+
+    @Override
+    public void onHeaderClicked() {
+       // Toast.makeText(this, "onHeaderClicked", Toast.LENGTH_SHORT).show();
+    }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -150,7 +264,9 @@ public class DashboardActivity extends AppCompatActivity {
             SharedPreferences sp = getSharedPreferences("SP_USER", MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
             editor.putString("Current_USERID", mUID);
-            editor.apply();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+                editor.apply();
+            }
 
             updateToken(FirebaseInstanceId.getInstance().getToken());
 
@@ -206,6 +322,18 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onStart() {
         checkUserStatus();
         super.onStart();
+    }
+
+    public class ViewHolder {
+        private DuoDrawerLayout mDuoDrawerLayout;
+        private DuoMenuView mDuoMenuView;
+        private Toolbar mToolbar;
+
+        public ViewHolder() {
+            mDuoDrawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
+            mDuoMenuView = (DuoMenuView) mDuoDrawerLayout.getMenuView();
+            mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        }
     }
 
 }

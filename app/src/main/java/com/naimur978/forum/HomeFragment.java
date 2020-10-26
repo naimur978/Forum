@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +25,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.amsen.par.searchview.AutoCompleteSearchView;
+import com.fivemin.chief.nonetworklibrary.networkBroadcast.NoNet;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,7 +57,9 @@ public class HomeFragment extends Fragment {
     List<ModelPost> postList;
     AdapterPosts adapterPosts;
 
-    private Button btnDonation;
+
+
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -70,17 +74,6 @@ public class HomeFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-        //////////////////////////
-
-        btnDonation = view.findViewById(R.id.btn_donation);
-        btnDonation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), FirstPageActivity.class));
-            }
-        });
-
-        //////////////////////////////////////////////////////////
 
 
         //recycler view
@@ -175,11 +168,11 @@ public class HomeFragment extends Fragment {
 
 
     private void checkUserStatus(){
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
             //user is signed in
         }else{
-            startActivity(new Intent(getActivity(),DashboardActivity.class));
+            //startActivity(new Intent(HomeFragment, SettingsActivity.class));
             getActivity().finish();
         }
     }
@@ -194,6 +187,7 @@ public class HomeFragment extends Fragment {
     //inflate options menu
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_main, menu);
 
         MenuItem item = menu.findItem(R.id.action_search);
@@ -234,20 +228,16 @@ public class HomeFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_logout){
-            firebaseAuth.signOut();
-            checkUserStatus();
-        }
 
-        else if(id == R.id.action_add_post){
+
+         if(id == R.id.action_add_post){
             startActivity(new Intent(getActivity(),AddPostActivity.class));
         }
-        else if(id == R.id.action_settings){
-            startActivity(new Intent(getActivity(), SettingsActivity.class));
-        }
+
 
         return super.onOptionsItemSelected(item);
     }

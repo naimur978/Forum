@@ -183,6 +183,7 @@ public class ChatListFragment extends Fragment {
     //inflate options menu
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_main, menu);
 
         //hide addpost icon from this fragment
@@ -196,13 +197,8 @@ public class ChatListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_logout){
-            firebaseAuth.signOut();
-            checkUserStatus();
-        }
-        else if(id == R.id.action_settings){
-            startActivity(new Intent(getActivity(), SettingsActivity.class));
-        }
+
+
         return super.onOptionsItemSelected(item);
     }
 }

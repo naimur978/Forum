@@ -8,12 +8,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/donation"
     tools:context=".BloodDonationMap.FirstPageActivity">
 
     <Button
         android:text="Need Blood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="150dp"
+        android:elevation="10dp"
         android:layout_marginTop="38dp"
         android:padding="20dp"
         android:textSize="20dp"
@@ -24,28 +26,28 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="Be a Donor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="20dp"
-        android:textColor="#ffffff"
-        android:background="@drawable/home_button"
         android:id="@+id/btn_donor_profile"
-        android:layout_marginTop="18dp"
+        android:layout_width="400dp"
+        android:layout_height="150dp"
         android:layout_below="@+id/btn_need_blood"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="70dp"
+        android:background="@drawable/home_button"
+        android:elevation="10dp"
+        android:padding="20dp"
+        android:text="Be a Donor"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
 
     <Button
-        android:text="Informations"
-        android:padding="20dp"
-        android:textSize="20dp"
-        android:textColor="#ffffff"
-        android:background="@drawable/home_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/btn_info"
-        android:layout_marginTop="20dp"
+        android:layout_width="400dp"
+        android:layout_height="150dp"
         android:layout_below="@+id/btn_donor_profile"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="70dp"
+        android:background="@drawable/home_button"
+        android:elevation="10dp"
+        android:padding="20dp"
+        android:text="Informations"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
 </RelativeLayout>

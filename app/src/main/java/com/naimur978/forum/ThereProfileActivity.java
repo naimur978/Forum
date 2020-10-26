@@ -216,6 +216,7 @@ public class ThereProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
         getMenuInflater().inflate(R.menu.menu_main, menu);
         menu.findItem(R.id.action_add_post).setVisible(false);
 
@@ -253,10 +254,7 @@ public class ThereProfileActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_logout){
-            firebaseAuth.signOut();
-            checkUserStatus();
-        }
+
 
         return super.onOptionsItemSelected(item);
     }

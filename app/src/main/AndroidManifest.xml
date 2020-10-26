@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.naimur978.forum">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.naimur978.forum"
+
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -16,10 +20,12 @@
         android:label="Health Forum"
         android:roundIcon="@mipmap/app_round_icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".BloodDonationMap.MapsActivity"
-            android:label="@string/title_activity_maps">
-        </activity>
+        android:theme="@style/AppTheme"
+        tools:replace="android:theme,android:label"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".BloodDonationMap.MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
         <activity android:name=".BloodDonationMap.DonorList" />
         <activity android:name=".BloodDonationMap.DonorForm" />
         <activity android:name=".BloodDonationMap.NeedBlood" />
@@ -27,14 +33,13 @@
         <activity android:name=".BloodDonationMap.FirstPageActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".PostDetailsActivity" />
-        <activity android:name=".DemoActivity" />
         <activity
             android:name=".AddPostActivity"
             android:label="Add New Post" />
         <activity
             android:name=".ChatActivity"
             android:theme="@style/AppThemeNo" />
-        <activity android:name=".DashboardActivity" />
+        <activity android:name=".DashboardActivity"/>
         <activity
             android:name=".RegisterActivity"
             android:screenOrientation="portrait" />
@@ -75,6 +80,7 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAsPFr4e4-qFGm1hhaEGOYnhLyzTaNbsJ4" />
+
 
     </application>
 

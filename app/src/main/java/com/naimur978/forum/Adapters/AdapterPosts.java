@@ -25,10 +25,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,12 +40,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.naimur978.forum.AddPostActivity;
 import com.naimur978.forum.ChatActivity;
-import com.naimur978.forum.DemoActivity;
 import com.naimur978.forum.Models.ModelPost;
 import com.naimur978.forum.PostDetailsActivity;
 import com.naimur978.forum.R;
 import com.naimur978.forum.ThereProfileActivity;
-import com.squareup.picasso.Picasso;
 
 
 import java.io.File;
@@ -55,7 +51,6 @@ import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.zip.Inflater;
 
 public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 

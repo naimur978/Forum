@@ -2,11 +2,14 @@ package com.naimur978.forum;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
+
+import com.fivemin.chief.nonetworklibrary.networkBroadcast.NoNet;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -14,10 +17,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     public static boolean onResetPasswordFragment = false;
 
+    private FragmentManager fm = null;
+    private NoNet mNoNet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        fm = getSupportFragmentManager();
+        mNoNet = new NoNet();
+        mNoNet.initNoNet(this, fm);
 
         frameLayout = findViewById(R.id.register_framelayout);
         defaultResetFragment(new SignInFragment());
@@ -38,6 +48,18 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onResume() {
+        mNoNet.RegisterNoNet();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        mNoNet.unRegisterNoNet();
+        super.onPause();
     }
 
     private void defaultResetFragment(Fragment fragment) {
