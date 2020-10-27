@@ -4,6 +4,7 @@ package com.naimur978.forum.Adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +103,15 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
         holder.messageLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(context, android.R.style.Theme_Material_Light_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(context);
+                }
+
                 builder.setTitle("Delete");
                 builder.setMessage("Are you sure to delete this message?");
 
@@ -121,9 +130,15 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
                         dialogInterface.dismiss();
                     }
                 });
+
                 builder.create().show();
             }
         });
+
+        //========================
+
+        //==============================
+
 
         if(position == chatList.size()-1){
             if(chatList.get(position).isSeen()){

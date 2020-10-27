@@ -3,57 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:padding="10dp"
+    android:padding="5dp"
     android:id="@+id/messageLayout"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/messageTv"
+                android:text="Hey there...!"
+                android:autoLink="all"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:background="@drawable/bg_receiver"
+                android:padding="15dp"
+                />
+
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:id="@+id/messageIv"
+                android:src="@drawable/ic_image_black"
+                android:adjustViewBounds="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:scaleType="fitCenter"
+                android:padding="0dp"/>
+
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/timeTv"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:text="02.03.2019 05:59PM"
+                android:textSize="12sp"
+                android:textColor="#000000"
+                />
+
+
+
+        </LinearLayout>
 
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/profileIv"
             app:c_border_color="@null"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:gravity="end"
+            android:visibility="gone"
             android:src="@drawable/ic_default_img"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/messageTv"
-            android:layout_weight="1"
-            android:text="Hey there...!"
-            android:autoLink="all"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:background="@drawable/bg_receiver"
-            android:visibility="gone"
-            android:padding="15dp"
-            />
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:id="@+id/messageIv"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_image_black"
-            android:padding="15dp"
-            android:scaleType="fitCenter"
-            android:background="@drawable/bg_receiver"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/timeTv"
-            android:paddingLeft="5dp"
-            android:text="02.03.2019 05:59PM"
-            android:textSize="12sp"
-            android:textColor="#000000"
-            />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"

@@ -57,10 +57,6 @@ public class HomeFragment extends Fragment {
     List<ModelPost> postList;
     AdapterPosts adapterPosts;
 
-
-
-
-
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -72,8 +68,6 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
         firebaseAuth = FirebaseAuth.getInstance();
-
-
 
 
         //recycler view
