@@ -43,7 +43,7 @@ import com.naimur978.forum.ChatActivity;
 import com.naimur978.forum.Models.ModelPost;
 import com.naimur978.forum.PostDetailsActivity;
 import com.naimur978.forum.R;
-import com.naimur978.forum.ThereProfileActivity;
+import com.naimur978.forum.TheirProfileActivity;
 
 
 import java.io.File;
@@ -232,7 +232,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(i==0){
                             //profile clicked
-                            Intent intent = new Intent(context, ThereProfileActivity.class);
+                            Intent intent = new Intent(context, TheirProfileActivity.class);
                             intent.putExtra("uid",uid);
                             context.startActivity(intent);
                         }
