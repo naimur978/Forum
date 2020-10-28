@@ -66,7 +66,7 @@ public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHold
 
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         cal.setTimeInMillis(Long.parseLong(timestamp));
-        String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa", cal).toString();
+        String dateTime = DateFormat.format("dd.MM.yyyy hh:mm aa", cal).toString();
 
         //set data
         holder.nameTv.setText(name);

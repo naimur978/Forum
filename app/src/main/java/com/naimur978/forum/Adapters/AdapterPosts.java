@@ -97,7 +97,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.setTimeInMillis(Long.parseLong(pTimeStamp));
-        String pTime = DateFormat.format("dd/MM/yyyy hh:mm aa",calendar).toString();
+        String pTime = DateFormat.format("dd.MM.yyyy hh:mm aa",calendar).toString();
 
         //set data
         holder.uNameTv.setText(uName);
