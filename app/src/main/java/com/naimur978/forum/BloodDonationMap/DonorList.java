@@ -65,13 +65,16 @@ public class DonorList extends AppCompatActivity {
                                 Intent intent = new Intent(DonorList.this, TheirProfileActivity.class);
                                 intent.putExtra("uid",uid);
                                 DonorList.this.startActivity(intent);
+                                dialogInterface.cancel();
                             }
                             if(i==1){
                                 //chat clicked
                                 Intent intent = new Intent(DonorList.this, ChatActivity.class);
                                 intent.putExtra("hisUid", uid);
                                 DonorList.this.startActivity(intent);
+                                dialogInterface.cancel();
                             }
+
                         }
                     });
                     builder.create().show();
