@@ -19,24 +19,29 @@
             android:layout_height="wrap_content"/>
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_width="260dp"
+            android:layout_height="350dp"
+            android:layout_margin="50dp"
+            android:padding="10dp"
+            android:layout_gravity="center"
             android:id="@+id/pImageIv"
-            android:background="@mipmap/ic_stub"
-            android:minHeight="400dp"/>
+            android:background="@drawable/add_image"
+            android:minHeight ="300dp"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/pTitleEt"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:padding="10dp"
             android:hint="Enter title"
-
+            android:layout_marginBottom="15dp"
             android:singleLine="true"/>
 
         <EditText
-            android:layout_margin="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:id="@+id/pDescriptionEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,10 +56,10 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:text="Upload"
             android:background="@drawable/facebook_button_bg"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="15dp"
             android:textColor="@color/colorPrimary"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             />
 
     </LinearLayout>

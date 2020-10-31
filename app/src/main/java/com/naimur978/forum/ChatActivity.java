@@ -796,8 +796,6 @@ public class ChatActivity extends AppCompatActivity {
 
         //hide searchview, addpost
         menu.findItem(R.id.action_search).setVisible(false);
-        menu.findItem(R.id.action_add_post).setVisible(false);
-
         super.onCreateOptionsMenu(menu);
         return false;
     }

@@ -33,9 +33,9 @@
         <activity android:name=".BloodDonationMap.FirstPageActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".PostDetailsActivity" />
-        <activity
-            android:name=".AddPostActivity"
-            android:label="Add New Post" />
+<!--        <activity-->
+<!--            android:name=".AddPostActivity"-->
+<!--            android:label="Add New Post" />-->
         <activity
             android:name=".ChatActivity"
             android:theme="@style/AppThemeNo" />

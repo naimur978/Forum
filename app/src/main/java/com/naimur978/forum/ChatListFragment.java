@@ -190,10 +190,6 @@ public class ChatListFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Chats");
 
         //hide addpost icon from this fragment
-        menu.findItem(R.id.action_add_post).setVisible(false);
-
-
-
         super.onCreateOptionsMenu(menu, inflater);
     }
 

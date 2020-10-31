@@ -157,7 +157,7 @@ public class UsersFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Users");
 
         //hide addpost icon from this fragment
-        menu.findItem(R.id.action_add_post).setVisible(false);
+        // menu.findItem(R.id.action_add_post).setVisible(false);
 
         //searchview
         MenuItem item = menu.findItem(R.id.action_search);

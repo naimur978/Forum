@@ -72,10 +72,9 @@
 
                         <ImageButton
                             android:id="@+id/moreBtn"
-                            android:layout_width = "wrap_content"
-                            android:layout_height ="wrap_content"
-                            android:background="@null"
-                            android:src="@drawable/ic_more_black"/>
+                            android:layout_width = "24dp"
+                            android:layout_height ="24dp"
+                            android:background="@drawable/options" />
 
                     </LinearLayout>
 
@@ -89,7 +88,8 @@
                         android:fontFamily="@font/chewy"
                         android:textColor="#2D2D30"
                         android:text="Title"
-                        android:autoLink="all"/>
+                        android:autoLink="all"
+                        android:layout_marginBottom="10dp"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
 
                         <ImageButton
                             android:id="@+id/likeBtn"
-                            android:layout_width="48dp"
+                            android:layout_width="24dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:paddingTop="5dp"
@@ -152,7 +152,7 @@
 
                         <ImageButton
                             android:id="@+id/commentBtn"
-                            android:layout_width="48dp"
+                            android:layout_width="24dp"
                             android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:background="@drawable/btn_feed_action"
@@ -160,7 +160,7 @@
 
                         <ImageButton
                             android:id="@+id/shareBtn"
-                            android:layout_width="48dp"
+                            android:layout_width="24dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/btn_feed_action"
@@ -178,13 +178,10 @@
                 android:layout_height="wrap_content"
                 android:text="Comments"
                 android:textColor="#696969"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
+                android:layout_margin="6dp"
                 android:drawablePadding="5dp"
                 android:padding="2dp"
-                android:drawableStart="@drawable/ic_comment_black"
-                android:drawableLeft="@drawable/ic_comment_black"/>
+                android:drawableStart="@drawable/ic_comment_black"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -212,6 +209,7 @@
             android:layout_marginLeft="11dp"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_default_img" />
+
 
         <EditText
             android:id="@+id/commentEt"

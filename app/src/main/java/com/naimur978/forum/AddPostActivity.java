@@ -60,6 +60,7 @@ import com.naimur978.forum.Adapters.AdapterPosts;
 import com.naimur978.forum.Models.ModelPost;
 import com.squareup.picasso.Picasso;
 
+
 import org.json.JSONObject;
 
 
@@ -854,7 +855,6 @@ public class AddPostActivity extends AppCompatActivity {
         menu.clear();
         getMenuInflater().inflate(R.menu.menu_main,menu);
 
-        menu.findItem(R.id.action_add_post).setVisible(false);
         menu.findItem(R.id.action_search).setVisible(false);
 
         return super.onCreateOptionsMenu(menu);
