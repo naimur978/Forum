@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.naimur978.forum.ChatActivity;
 import com.naimur978.forum.R;
-import com.naimur978.forum.ThereProfileActivity;
+import com.naimur978.forum.TheirProfileActivity;
 
 import java.util.ArrayList;
 
@@ -62,7 +62,7 @@ public class DonorList extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             if(i==0){
                                 //profile clicked
-                                Intent intent = new Intent(DonorList.this, ThereProfileActivity.class);
+                                Intent intent = new Intent(DonorList.this, TheirProfileActivity.class);
                                 intent.putExtra("uid",uid);
                                 DonorList.this.startActivity(intent);
                             }

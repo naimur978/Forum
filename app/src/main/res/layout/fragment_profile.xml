@@ -78,7 +78,20 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginLeft="5dp"
                             android:text="phone"
+                            android:paddingBottom="4dp"
                             android:textColor="@color/colorAccent" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="MY PROFILE"
+                            android:textSize="20sp"
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:paddingTop="10dp"
+                            android:background="#f1eded"
+                            />
 
 
 

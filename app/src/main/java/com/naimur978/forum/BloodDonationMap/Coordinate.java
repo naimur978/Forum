@@ -1,8 +1,6 @@
 package com.naimur978.forum.BloodDonationMap;
 
-/**
- * Created by user on 1/1/2017.
- */
+
 
 public class Coordinate {
     public Double lat;

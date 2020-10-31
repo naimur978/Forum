@@ -169,7 +169,7 @@ public class ChatActivity extends AppCompatActivity {
                             Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                             cal.setTimeInMillis(Long.parseLong(onlineStatus));
                             android.text.format.DateFormat df = new android.text.format.DateFormat();
-                            String dateTime = df.format("dd/MM/yyyy hh:mm aa", cal).toString();
+                            String dateTime = df.format("dd.MM.yyyy hh:mm aa", cal).toString();
                             userStatusTv.setText("Last seen at: " +dateTime);
 
                             //now have to fix the timestamp or get the timestamp from hisUID

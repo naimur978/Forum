@@ -70,10 +70,11 @@
         android:gravity="center">
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
             android:id="@+id/attachBtn"
-            android:background="@drawable/ic_attach_black"
+            android:background="@drawable/attach"
         />
 
         <EditText
@@ -83,7 +84,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="Start Typing..."
-            android:textSize="10sp"
+            android:textSize="15sp"
             android:padding="15dp"
             android:inputType="textCapSentences|textMultiLine"
             />

@@ -2,9 +2,6 @@ package com.naimur978.forum.BloodDonationMap;
 
 import android.view.View;
 
-/**
- * Created by root on 11/6/16.
- */
 
 public class Donor {
     String uid;

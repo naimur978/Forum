@@ -296,6 +296,7 @@ public class DashboardActivity extends AppCompatActivity implements DuoMenuView.
 
 
 
+
     private class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();

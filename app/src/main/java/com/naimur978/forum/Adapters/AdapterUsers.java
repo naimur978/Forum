@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.naimur978.forum.ChatActivity;
 import com.naimur978.forum.Models.ModelUsers;
 import com.naimur978.forum.R;
-import com.naimur978.forum.ThereProfileActivity;
+import com.naimur978.forum.TheirProfileActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -69,7 +68,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(i==0){
                             //profile clicked
-                            Intent intent = new Intent(context, ThereProfileActivity.class);
+                            Intent intent = new Intent(context, TheirProfileActivity.class);
                             intent.putExtra("uid",hisUID);
                             context.startActivity(intent);
                         }

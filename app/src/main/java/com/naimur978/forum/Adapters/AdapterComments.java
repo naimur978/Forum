@@ -4,10 +4,12 @@ package com.naimur978.forum.Adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.text.format.DateFormat;
 import android.widget.Toast;
@@ -64,7 +66,7 @@ public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHold
 
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         cal.setTimeInMillis(Long.parseLong(timestamp));
-        String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa", cal).toString();
+        String dateTime = DateFormat.format("dd.MM.yyyy hh:mm aa", cal).toString();
 
         //set data
         holder.nameTv.setText(name);
@@ -84,6 +86,14 @@ public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHold
                 if(myUid.equals(uid)){
                     //my commment
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext());
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        builder = new AlertDialog.Builder(view.getRootView().getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
+                    } else {
+                        builder = new AlertDialog.Builder(view.getRootView().getContext());
+                    }
+
+
                     builder.setTitle("Delete");
                     builder.setMessage("Are you sure to delete this comment?");
                     builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {

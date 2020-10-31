@@ -2,7 +2,6 @@ package com.naimur978.forum;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,7 +33,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThereProfileActivity extends AppCompatActivity {
+public class TheirProfileActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     RecyclerView postsRecyclerView;
 
@@ -65,8 +63,6 @@ public class ThereProfileActivity extends AppCompatActivity {
 
 
         Toolbar toolbar = findViewById(R.id.main_toolbar);
-        TextView toolbarTitle = findViewById(R.id.titleText);
-        TextView toolbarCounter = findViewById(R.id.titleCounter);
         toolbar.setTitle("Profile");
        // toolbarTitle.setText("Add New Post");
         //toolbarCounter.setText("forum");
@@ -110,7 +106,7 @@ public class ThereProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 //in case of error
-                Toast.makeText(ThereProfileActivity.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TheirProfileActivity.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
     });
@@ -141,7 +137,7 @@ public class ThereProfileActivity extends AppCompatActivity {
                     postList.add(modelPost);
 
                     //adapter
-                    adapterPosts = new AdapterPosts(ThereProfileActivity.this, postList);
+                    adapterPosts = new AdapterPosts(TheirProfileActivity.this, postList);
                     //set adapter to reyclerview
                     postsRecyclerView.setAdapter(adapterPosts);
                 }
@@ -150,7 +146,7 @@ public class ThereProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 //in case of error
-                Toast.makeText(ThereProfileActivity.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TheirProfileActivity.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -183,7 +179,7 @@ public class ThereProfileActivity extends AppCompatActivity {
                     postList.add(modelPost);
 
                     //adapter
-                    adapterPosts = new AdapterPosts(ThereProfileActivity.this, postList);
+                    adapterPosts = new AdapterPosts(TheirProfileActivity.this, postList);
                     //set adapter to reyclerview
                     postsRecyclerView.setAdapter(adapterPosts);
                 }
@@ -192,7 +188,7 @@ public class ThereProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 //in case of error
-                Toast.makeText(ThereProfileActivity.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TheirProfileActivity.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

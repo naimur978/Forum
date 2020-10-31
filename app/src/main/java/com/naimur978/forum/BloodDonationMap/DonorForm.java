@@ -94,8 +94,8 @@ public class DonorForm extends AppCompatActivity {
                 String city = cityChoice.getSelectedItem().toString();
                 String group = groupChoice.getSelectedItem().toString();
                 String mobile = Mobile.getText().toString();
-                String lat = MapsActivity.lat.toString();
-                String lng = MapsActivity.lng.toString();
+                String lat = FirstPageActivity.lat.toString();
+                String lng = FirstPageActivity.lng.toString();
 
                 Donor donor = new Donor(uid,name,mobile,group,city,lat, lng);
                 DatabaseReference myRef = database.getReference("donors");
