@@ -199,7 +199,7 @@ public class HomeFragment extends Fragment {
 
 
 
-        //serach listener
+        //search listener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -229,16 +229,16 @@ public class HomeFragment extends Fragment {
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-
-         if(id == R.id.action_add_post){
-            startActivity(new Intent(getActivity(),AddPostActivity.class));
-        }
-
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//
+//
+//         if(id == R.id.action_add_post){
+//            startActivity(new Intent(getActivity(),AddPostActivity.class));
+//        }
+//
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 }

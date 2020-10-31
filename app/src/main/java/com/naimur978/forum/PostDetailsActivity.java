@@ -678,7 +678,6 @@ public class PostDetailsActivity extends AppCompatActivity {
                 return false;
             }
         });*/
-        menu.findItem(R.id.action_add_post).setVisible(false);
         menu.findItem(R.id.action_search).setVisible(false);
 
         return super.onCreateOptionsMenu(menu);

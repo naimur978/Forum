@@ -96,10 +96,13 @@ public class DashboardActivity extends AppCompatActivity implements DuoMenuView.
                         navigation.setSelectedItemId(R.id.nav_profile);
                         break;
                     case 2:
+                        navigation.setSelectedItemId(R.id.nav_add);
+                        break;
+                    case 3:
                         navigation.setSelectedItemId(R.id.nav_users);
                         break;
 
-                    case 3:
+                    case 4:
                         navigation.setSelectedItemId(R.id.nav_chat);
                         break;
                 }
@@ -243,11 +246,14 @@ public class DashboardActivity extends AppCompatActivity implements DuoMenuView.
                 case R.id.nav_profile:
                     viewPager.setCurrentItem(1);
                     return true;
-                case R.id.nav_users:
+                case R.id.nav_add:
                     viewPager.setCurrentItem(2);
                     return true;
-                case R.id.nav_chat:
+                case R.id.nav_users:
                     viewPager.setCurrentItem(3);
+                    return true;
+                case R.id.nav_chat:
+                    viewPager.setCurrentItem(4);
                     return true;
             }
             return false;
@@ -281,6 +287,7 @@ public class DashboardActivity extends AppCompatActivity implements DuoMenuView.
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "Home");
         adapter.addFragment(new ProfileFragment(), "Profile");
+        adapter.addFragment(new CreatePostFragment(), "Post");
         adapter.addFragment(new UsersFragment(), "Users");
         adapter.addFragment(new ChatListFragment(), "Chat");
 
