@@ -84,13 +84,14 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="MY PROFILE"
+                            android:text="Most Recent Posts ⬇"
                             android:textSize="20sp"
                             android:textColor="#000000"
                             android:textStyle="bold"
                             android:textAlignment="center"
-                            android:paddingTop="10dp"
-                            android:background="#f1eded"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:background="#0000ffcc"
                             />
 
 
