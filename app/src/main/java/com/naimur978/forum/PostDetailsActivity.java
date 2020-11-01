@@ -63,7 +63,7 @@ public class PostDetailsActivity extends AppCompatActivity {
 
     ImageView uPictureIv, pImageIv;
     TextView uNameTv, pTimeTv, pTitleTv, pDescriptionTv, pLikesTv, pCommentsTv;
-    ImageButton moreBtn;
+    ImageButton moreBtn, commentBtn;
     ImageButton likeBtn, shareBtn;
     LinearLayout profileLayout;
 
@@ -97,6 +97,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         pCommentsTv = findViewById(R.id.pCommentsTv);
         moreBtn = findViewById(R.id.moreBtn);
         likeBtn = findViewById(R.id.likeBtn);
+        commentBtn = findViewById(R.id.commentBtn);
         shareBtn = findViewById(R.id.shareBtn);
         profileLayout = findViewById(R.id.profileLayout);
         commentEt = findViewById(R.id.commentEt);
@@ -134,13 +135,16 @@ public class PostDetailsActivity extends AppCompatActivity {
             }
         });
 
-        moreBtn.setOnClickListener(new View.OnClickListener() {
+        // Comment button clicked
+
+        commentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                showMoreOptions();
+            public void onClick(View v) {
+                loadComments();
             }
         });
 
+        moreBtn.setOnClickListener(view -> showMoreOptions());
 
         //share button click handle
         shareBtn.setOnClickListener(new View.OnClickListener() {
@@ -470,22 +474,6 @@ public class PostDetailsActivity extends AppCompatActivity {
                                     Toast.makeText(PostDetailsActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     private void updateCommentCount() {
@@ -550,9 +538,6 @@ public class PostDetailsActivity extends AppCompatActivity {
 
                 Picasso.get().load(myDp).into(cAvatarIv);
             }
-
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
