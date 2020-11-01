@@ -113,13 +113,7 @@ public class AddPostActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);*/
 
-        Toolbar toolbar = findViewById(R.id.main_toolbar);
-        TextView toolbarTitle = findViewById(R.id.titleText);
-        TextView toolbarCounter = findViewById(R.id.titleCounter);
-        //toolbar.setTitle("Add New Post");
-        toolbarTitle.setText("Add New Post");
-        //toolbarCounter.setText("2");
-        setSupportActionBar(toolbar);
+
 
 
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -141,17 +135,16 @@ public class AddPostActivity extends AppCompatActivity {
         //validate if we came here to update post
         if(isUpdateKey.equals("editPost")){
             //update
-            toolbarTitle.setText("Update Post");
             uploadBtn.setText("Update");
             loadPostData(editPostId);
 
         }else{
             //add new post
-            toolbarTitle.setText("Add New Post");
+
             uploadBtn.setText("Upload");
         }
 
-        toolbarCounter.setText(email);
+
 
 
         userDbRef = FirebaseDatabase.getInstance().getReference("Users");
