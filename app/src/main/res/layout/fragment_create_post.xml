@@ -20,7 +20,6 @@
             android:layout_height="350dp"
             android:layout_margin="50dp"
             android:padding="10dp"
-            android:tint="@color/colorPrimary"
             android:layout_gravity="center"
             android:id="@+id/pImageIv"
             android:src="@drawable/add_image"

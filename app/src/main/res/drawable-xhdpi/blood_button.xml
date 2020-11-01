@@ -5,7 +5,7 @@
     <!-- view background color -->
     <gradient
         android:startColor="#47a"
-        android:endColor="#a11">
+        android:endColor="#111">
     </gradient>
 
     <!-- view border color and width -->
