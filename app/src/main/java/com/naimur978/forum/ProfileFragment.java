@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -297,6 +298,13 @@ public class ProfileFragment extends Fragment {
 
         String options[] = {"Edit Profile Picture", "Edit Cover Photo", "Edit Name", "Edit Phone"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Light_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(getActivity());
+        }
+
         builder.setTitle("Choose Action");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -324,7 +332,14 @@ public class ProfileFragment extends Fragment {
 
     private void showNamePhoneUpdateDialog(final String key) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Update"+key);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Light_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(getActivity());
+        }
+
+        builder.setTitle("Update "+key);
         //custom dialog
         LinearLayout linearLayout = new LinearLayout(getActivity());
         linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -437,6 +452,9 @@ public class ProfileFragment extends Fragment {
     private void showImagePickDialog() {
         String options[] = {"Camera","Gallery"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+
+
         builder.setTitle("Pick Image From");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
