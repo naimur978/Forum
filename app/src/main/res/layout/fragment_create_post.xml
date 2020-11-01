@@ -16,13 +16,14 @@
         
 
         <ImageView
-            android:layout_width="260dp"
+            android:layout_width="300dp"
             android:layout_height="350dp"
             android:layout_margin="50dp"
             android:padding="10dp"
+            android:tint="@color/colorPrimary"
             android:layout_gravity="center"
             android:id="@+id/pImageIv"
-            android:background="@drawable/add_image"
+            android:src="@drawable/add_image"
             android:minHeight ="300dp"/>
 
         <EditText
