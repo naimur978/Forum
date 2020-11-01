@@ -712,16 +712,16 @@ public class ProfileFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if(id == R.id.action_add_post){
-            startActivity(new Intent(getActivity(),AddPostActivity.class));
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if(id == R.id.action_add_post){
+//            startActivity(new Intent(getActivity(),AddPostActivity.class));
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
 

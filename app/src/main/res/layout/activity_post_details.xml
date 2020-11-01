@@ -69,13 +69,6 @@
                                 android:text="33 min"
                                 />
                         </LinearLayout>
-
-                        <ImageButton
-                            android:id="@+id/moreBtn"
-                            android:layout_width = "24dp"
-                            android:layout_height ="24dp"
-                            android:background="@drawable/options" />
-
                     </LinearLayout>
 
                     <TextView
