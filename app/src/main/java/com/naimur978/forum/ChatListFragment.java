@@ -186,6 +186,8 @@ public class ChatListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.action_search).setVisible(false);
+
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Chats");
 
@@ -196,7 +198,6 @@ public class ChatListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
 
         return super.onOptionsItemSelected(item);
     }

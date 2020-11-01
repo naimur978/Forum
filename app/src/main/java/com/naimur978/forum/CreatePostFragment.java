@@ -13,7 +13,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -24,9 +25,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -104,6 +107,9 @@ public class CreatePostFragment extends Fragment {
                                  Bundle savedInstanceState)
         {
             View root = inflater.inflate(R.layout.fragment_create_post, container, false);
+            //Remove title bar
+
+
 
        /* actionBar = getActionBar();
         actionBar.setTitle("Add New Post");
@@ -111,13 +117,7 @@ public class CreatePostFragment extends Fragment {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);*/
 
-            Toolbar toolbar = root.findViewById(R.id.main_toolbar);
-            TextView toolbarTitle = root.findViewById(R.id.titleText);
-            TextView toolbarCounter = root.findViewById(R.id.titleCounter);
-            //toolbar.setTitle("Add New Post");
-            toolbarTitle.setText("Add New Post");
-            //toolbarCounter.setText("2");
-            //setSupportActionBar(toolbar);
+
 
 
             cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -140,17 +140,15 @@ public class CreatePostFragment extends Fragment {
             //validate if we came here to update post
             if(isUpdateKey.equals("editPost")){
                 //update
-                toolbarTitle.setText("Update Post");
                 uploadBtn.setText("Update");
                 loadPostData(editPostId);
 
             }else{
                 //add new post
-                toolbarTitle.setText("Add New Post");
                 uploadBtn.setText("Upload");
             }
 
-            toolbarCounter.setText(email);
+
 
 
             userDbRef = FirebaseDatabase.getInstance().getReference("Users");
@@ -850,15 +848,7 @@ public class CreatePostFragment extends Fragment {
 //            return super.onSupportNavigateUp();
 //        }
 //
-//        public void onCreateOptionsMenu(Menu menu) {
-//            menu.clear();
-//            createFragment.getMenuInflater().inflate(R.menu.menu_main,menu);
-//
-//            menu.findItem(R.id.action_add_post).setVisible(false);
-//            menu.findItem(R.id.action_search).setVisible(false);
-//
-//            return super.onCreateOptionsMenu();
-//        }
+
 
         @Override
         public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -919,4 +909,26 @@ public class CreatePostFragment extends Fragment {
         }
 
         //handle permission results-----------------------------------------------------------------
+
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Add Post");
+
+        menu.findItem(R.id.action_search).setVisible(false);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+}
