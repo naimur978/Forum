@@ -183,7 +183,7 @@ public class DashboardActivity extends AppCompatActivity implements DuoMenuView.
 
         // Navigate to the right fragment
         switch (position) {
-            case 4:
+            case 1:
                 startActivity(new Intent(this, FirstPageActivity.class));
                 break;
 
