@@ -39,8 +39,8 @@ public class FirstPageActivity extends AppCompatActivity implements GoogleApiCli
     public static String donorId="no";
     SharedPreferences sharedPreferences;
 
-    public static Double lat;
-    public static Double lng;
+    public static Double lat = 22.341900;
+    public static Double lng = 91.815536 ;
 
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=1;
 
