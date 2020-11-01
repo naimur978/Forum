@@ -48,7 +48,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginLeft="10dp"
-
                         android:background="#80000000"
                         >
 
