@@ -9,53 +9,58 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/donate_blood"
-    android:alpha="0.85"
     android:gravity="center"
     tools:context=".BloodDonationMap.FirstPageActivity">
 
-    <Button
-        android:text="Need Blood"
-        android:alpha="0.9"
-        android:textAlignment="center"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:elevation="10dp"
-        android:layout_marginTop="38dp"
-        android:padding="10dp"
-        android:textSize="20dp"
-        android:textColor="#ffffff"
-        android:background="@drawable/blood_button"
-        android:id="@+id/btn_need_blood"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/llb">
 
-    <Button
-        android:id="@+id/btn_donor_profile"
-        android:alpha="0.9"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btn_need_blood"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/blood_button"
-        android:elevation="10dp"
-        android:padding="20dp"
-        android:text="Be a Donor"
-        android:textColor="#ffffff"
-        android:textSize="20dp" />
+        <Button
+            android:text="Need Blood"
+            android:alpha="0.8"
+            android:textAlignment="center"
+            android:layout_width="140dp"
+            android:layout_height="70dp"
+            android:elevation="10dp"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textSize="16dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/blood_button"
+            android:id="@+id/btn_need_blood" />
+
+        <Button
+            android:id="@+id/btn_donor_profile"
+            android:alpha="0.8"
+            android:layout_margin="10dp"
+            android:layout_width="140dp"
+            android:layout_height="70dp"
+            android:background="@drawable/blood_button"
+            android:elevation="10dp"
+            android:padding="10dp"
+            android:text="Be a Donor"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_info"
-        android:alpha="0.9"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:alpha="0.8"
+        android:layout_margin="10dp"
+        android:layout_width="140dp"
+        android:layout_height="70dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btn_donor_profile"
-        android:layout_marginTop="70dp"
+        android:layout_below="@+id/llb"
         android:background="@drawable/blood_button"
         android:elevation="10dp"
-        android:padding="20dp"
-        android:text="Informations"
+        android:padding="10dp"
+        android:text="Need to know"
         android:textColor="#ffffff"
-        android:textSize="20dp" />
+        android:textSize="16dp" />
 </RelativeLayout>

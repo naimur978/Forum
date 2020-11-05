@@ -9,26 +9,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
-        
-
-        <ImageView
-            android:layout_width="300dp"
-            android:layout_height="350dp"
-            android:layout_margin="50dp"
-            android:padding="10dp"
-            android:layout_gravity="center"
-            android:id="@+id/pImageIv"
-            android:src="@drawable/add_image"
-            android:minHeight ="300dp"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/pTitleEt"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:padding="10dp"
@@ -45,6 +34,17 @@
             android:hint="Enter description..."
             android:singleLine="false"
             android:padding="10dp" />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="350dp"
+            android:layout_margin="50dp"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/pImageIv"
+            android:src="@drawable/add_image"
+            android:tooltipText="Add Image"
+            android:minHeight ="300dp"/>
 
         <Button
             android:layout_width="150dp"

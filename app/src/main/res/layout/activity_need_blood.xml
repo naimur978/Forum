@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background= "#47a"
+    android:background= "#19427a"
     tools:context=".BloodDonationMap.NeedBlood">
 
     <ImageView
@@ -42,10 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
         <LinearLayout
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -54,7 +52,7 @@
             <TextView
                 android:textColor="#ffffff"
                 android:text="City"
-                android:textSize="18dp"
+                android:textSize="20sp"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
@@ -69,7 +67,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -78,7 +77,7 @@
             <TextView
                 android:textColor="#ffffff"
                 android:text="Blood Group"
-                android:textSize="18dp"
+                android:textSize="20sp"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
@@ -91,30 +90,16 @@
 
         </LinearLayout>
 
-
-
-
-        <LinearLayout
-            android:layout_margin="15dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:layout_marginLeft="20dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:background="@drawable/button_background"
-                android:textColor="@color/colorPrimary"
-                android:id="@+id/startSearch"
-                android:text="Continue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-
+        <Button
+            android:background="@drawable/button_background"
+            android:layout_margin="30dp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/startSearch"
+            android:textSize="15sp"
+            android:text="Continue"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

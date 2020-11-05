@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/abstract2"
-    android:alpha="0.8"
     tools:context=".HomeFragment">
 
     <ScrollView
@@ -13,9 +11,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!-- TODO: Update blank fragment layout -->
+            android:layout_height="wrap_content">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/postsRecyclerView"
                 android:layout_width="match_parent"
