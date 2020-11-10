@@ -102,6 +102,8 @@ public class DonorForm extends AppCompatActivity {
                 myRef.child(city).child(group).push().setValue(donor);
 
                 finish();
+
+                Toast.makeText(DonorForm.this, "Your Information has been successfully saved in our database. Thank you for taking the time.", Toast.LENGTH_LONG).show();
             }
         });
 
