@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
@@ -28,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.naimur978.forum.BloodDonationMap.FirstPageActivity;
+import com.naimur978.forum.CovidStatus.WorldDataActivity;
 import com.naimur978.forum.CustomDrawer.DrawMenuAdapter;
 import com.naimur978.forum.Notifications.Token;
 
@@ -186,6 +186,9 @@ public class DashboardActivity extends AppCompatActivity implements DuoMenuView.
             case 1:
                 startActivity(new Intent(this, FirstPageActivity.class));
                 break;
+
+            case 2:
+                startActivity(new Intent(this, WorldDataActivity.class));
 
 
         }

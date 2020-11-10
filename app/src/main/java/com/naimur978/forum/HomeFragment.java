@@ -196,6 +196,8 @@ public class HomeFragment extends Fragment {
 
 
 
+
+
         //search listener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
