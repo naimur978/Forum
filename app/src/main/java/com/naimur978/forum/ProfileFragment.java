@@ -277,7 +277,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void requestStoragePermission(){
-       requestPermissions(storagePermissions,STORAGE_REQUEST_CODE);
+        requestPermissions(storagePermissions,STORAGE_REQUEST_CODE);
         //requestPermissions(storagePermissions,STORAGE_REQUEST_CODE);
     }
 
@@ -368,13 +368,13 @@ public class ProfileFragment extends Fragment {
                                     Toast.makeText(getActivity(), "Updated..", Toast.LENGTH_SHORT).show();
                                 }
                             })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            pd.dismiss();
-                            Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    pd.dismiss();
+                                    Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
 
                     //if user edit his name, also change it from hist posts
                     if(key.equals("name")){

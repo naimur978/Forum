@@ -16,9 +16,9 @@
     <application
         android:name="androidx.multidex.MultiDexApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/app_icon"
+        android:icon="@mipmap/logo"
         android:label="Health Forum"
-        android:roundIcon="@mipmap/app_round_icon"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme,android:label"
