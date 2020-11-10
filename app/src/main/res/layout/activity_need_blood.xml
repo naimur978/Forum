@@ -61,7 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/needBlood" />
+                android:id="@+id/needCity" />
 
 
         </LinearLayout>
@@ -86,7 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/needCity" />
+                android:id="@+id/needBlood" />
 
         </LinearLayout>
 
