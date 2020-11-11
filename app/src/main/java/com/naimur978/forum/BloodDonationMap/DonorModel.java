@@ -3,7 +3,7 @@ package com.naimur978.forum.BloodDonationMap;
 import android.view.View;
 
 
-public class Donor {
+public class DonorModel {
     String uid;
     String name;
     String contuctNumber;
@@ -28,11 +28,11 @@ public class Donor {
         this.lan = lan;
     }
 
-    public Donor() {
+    public DonorModel() {
 
     }
 
-    public Donor(String uid, String name, String contuctNumber, String bloodGroup, String city, String lat, String lng) {
+    public DonorModel(String uid, String name, String contuctNumber, String bloodGroup, String city, String lat, String lng) {
         this.uid = uid;
         this.name = name;
         this.contuctNumber = contuctNumber;

@@ -53,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.d("Donor", String.valueOf(i));
 
 
-            Donor donor = DonorList.donorInfo.get(i);
+            DonorModel donor = DonorList.donorInfo.get(i);
             Double lat = new Double(donor.lat);
             Double lng = new Double(donor.lan);
 
