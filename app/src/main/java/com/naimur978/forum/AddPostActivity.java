@@ -654,7 +654,7 @@ public class AddPostActivity extends AppCompatActivity {
                                      String notificationType, String notificationTopic){
         //prepare data for notification
         String NOTIFICATION_TOPIC = "/topics/" + notificationTopic;//topic must match with what the receiver subscribed
-        String NOTIFICATION_TITLE = title;//namur added new post
+        String NOTIFICATION_TITLE = title;//naimur added new post
         String NOTIFICATION_MESSAGE = description;//content of post
         String NOTIFICATION_TYPE = notificationType;//chat & post ; 2 notification types
 
