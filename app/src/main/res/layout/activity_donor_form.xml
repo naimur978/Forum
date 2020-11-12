@@ -130,7 +130,7 @@
 
             <TextView
                 android:textColor="#ffffff"
-                android:text="Mobile Number"
+                android:text="Contact Number*"
                 android:textSize="18dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"

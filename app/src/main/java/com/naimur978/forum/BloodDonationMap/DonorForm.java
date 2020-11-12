@@ -2,6 +2,7 @@ package com.naimur978.forum.BloodDonationMap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -89,16 +90,22 @@ public class DonorForm extends AppCompatActivity {
                 String city = cityChoice.getSelectedItem().toString();
                 String group = groupChoice.getSelectedItem().toString();
                 String mobile = Mobile.getText().toString();
-                String lat = FirstPageActivity.lat.toString();
-                String lng = FirstPageActivity.lng.toString();
 
-                DonorModel donor = new DonorModel(uid,name,mobile,group,city,lat, lng);
-                DatabaseReference myRef = database.getReference("donors");
-                myRef.child(city).child(group).push().setValue(donor);
+                if(mobile.length()>=1){
+                    String lat = FirstPageActivity.lat.toString();
+                    String lng = FirstPageActivity.lng.toString();
 
-                finish();
+                    DonorModel donor = new DonorModel(uid,name,mobile,group,city,lat, lng);
+                    DatabaseReference myRef = database.getReference("donors");
+                    myRef.child(city).child(group).push().setValue(donor);
 
-                Toast.makeText(DonorForm.this, "Your Information has been successfully saved in our database. Thank you for taking the time.", Toast.LENGTH_LONG).show();
+                    finish();
+
+                    Toast.makeText(DonorForm.this, "Your Information has been successfully saved in our database. Thank you for taking the time.", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(DonorForm.this, "You must provide your contact number.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
