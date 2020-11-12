@@ -30,7 +30,7 @@ public class DonorList extends AppCompatActivity {
     ArrayList<String> donorList;
     ListView listView;
     ArrayAdapter<String> arrayAdapter;
-    public static ArrayList<Donor> donorInfo;
+    public static ArrayList<DonorModel> donorInfo;
     Button buttonMap;
 
     @Override
@@ -103,7 +103,7 @@ public class DonorList extends AppCompatActivity {
         myRef.child(city).child(group).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Donor donor = dataSnapshot.getValue(Donor.class);
+                DonorModel donor = dataSnapshot.getValue(DonorModel.class);
                 donorInfo.add(donor);
                 String donorInfo = donor.name + "   \n" + donor.contuctNumber;
                 donorList.add(donorInfo);

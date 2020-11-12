@@ -181,7 +181,7 @@ public class ResetPasswordFragment extends Fragment {
     private void setFragment(Fragment fragment) {
         //include getactivity, cz its not from this activity(outside of the group); in contrast with register activity
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.slide_from_right,R.anim.slideout_from_left);
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_left,R.anim.slideout_from_right);
         fragmentTransaction.replace(parentFrameLayout.getId(),fragment);
         fragmentTransaction.commit();
     }

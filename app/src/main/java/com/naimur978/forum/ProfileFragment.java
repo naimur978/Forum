@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
-import android.renderscript.Sampler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,7 +32,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +51,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.naimur978.forum.Adapters.AdapterPosts;
+import com.naimur978.forum.BloodDonationMap.DonorForm;
 import com.naimur978.forum.Models.ModelPost;
 import com.squareup.picasso.Picasso;
 
@@ -72,7 +71,7 @@ public class ProfileFragment extends Fragment {
 
     ImageView avatarIv, coverIv;
     TextView nameTv,emailTv, phoneTv;
-    FloatingActionButton fab;
+    FloatingActionButton fab, fab2;
     RecyclerView postsRecyclerView;
 
     ProgressDialog pd;
@@ -131,6 +130,7 @@ public class ProfileFragment extends Fragment {
         phoneTv = view.findViewById(R.id.phoneTv);
         coverIv = view.findViewById(R.id.coverIv);
         fab = view.findViewById(R.id.fab);
+        fab2 = view.findViewById(R.id.fab2);
         postsRecyclerView = view.findViewById(R.id.recylerview_posts);
 
         //init progress dialog
@@ -180,6 +180,14 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
 
                 showEditProfileDialog();
+            }
+        });
+
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DonorForm.class);
+                startActivity(intent);
             }
         });
 
@@ -277,7 +285,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void requestStoragePermission(){
-       requestPermissions(storagePermissions,STORAGE_REQUEST_CODE);
+        requestPermissions(storagePermissions,STORAGE_REQUEST_CODE);
         //requestPermissions(storagePermissions,STORAGE_REQUEST_CODE);
     }
 
@@ -368,13 +376,13 @@ public class ProfileFragment extends Fragment {
                                     Toast.makeText(getActivity(), "Updated..", Toast.LENGTH_SHORT).show();
                                 }
                             })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            pd.dismiss();
-                            Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    pd.dismiss();
+                                    Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
 
                     //if user edit his name, also change it from hist posts
                     if(key.equals("name")){

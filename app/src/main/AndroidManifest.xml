@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.naimur978.forum"
-
-    >
+    package="com.naimur978.forum">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -16,31 +13,36 @@
     <application
         android:name="androidx.multidex.MultiDexApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/app_icon"
+        android:icon="@mipmap/logo"
         android:label="Health Forum"
-        android:roundIcon="@mipmap/app_round_icon"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:theme,android:label"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:theme,android:label">
+
+        <activity android:name=".CovidStatus.CountrywiseDataActivity"/>
+        <activity android:name=".CovidStatus.PerCountryData"/>
+        <activity android:name=".CovidStatus.WorldDataActivity"/>
+
+
         <activity
             android:name=".BloodDonationMap.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity android:name=".BloodDonationMap.DonorList" />
         <activity android:name=".BloodDonationMap.DonorForm" />
         <activity android:name=".BloodDonationMap.NeedBlood" />
         <activity android:name=".BloodDonationMap.Information" />
         <activity android:name=".BloodDonationMap.FirstPageActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".AddPostActivity"/>
-        <activity android:name=".PostDetailsActivity" />
-<!--        <activity-->
-<!--            android:name=".AddPostActivity"-->
-<!--            android:label="Add New Post" />-->
+        <activity android:name=".AddPostActivity" />
+        <activity android:name=".PostDetailsActivity" /> <!-- <activity -->
+        <!-- android:name=".AddPostActivity" -->
+        <!-- android:label="Add New Post" /> -->
         <activity
             android:name=".ChatActivity"
             android:theme="@style/AppThemeNo" />
-        <activity android:name=".DashboardActivity"/>
+        <activity android:name=".DashboardActivity" />
         <activity
             android:name=".RegisterActivity"
             android:screenOrientation="portrait" />
@@ -81,9 +83,6 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBGlGxr3k3sdgpplv6JpaDxQKDvfObHuJM" />
-
-
-
     </application>
 
 </manifest>

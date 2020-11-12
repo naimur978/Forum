@@ -84,6 +84,7 @@ public class HomeFragment extends Fragment {
         //init post list
         postList = new ArrayList<>();
 
+
         loadPosts();
 
         return view;
@@ -189,6 +190,8 @@ public class HomeFragment extends Fragment {
 
         MenuItem item = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+
+
 
 
 

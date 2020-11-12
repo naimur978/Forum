@@ -442,38 +442,38 @@ public class PostDetailsActivity extends AppCompatActivity {
         //each post will have a child "comment"
 
 
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("Comments");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("Comments");
 
-                    HashMap<String, Object> hashMap = new HashMap<>();
+        HashMap<String, Object> hashMap = new HashMap<>();
 
-                    hashMap.put("cId", timeStamp);
-                    hashMap.put("comment", comment);
-                    hashMap.put("timestamp", timeStamp);
-                    hashMap.put("uid", myUid);
-                    hashMap.put("uEmail", myEmail);
-                    hashMap.put("uDp", myDp);
-                    /*hashMap.put("uName", myName);*/
-                    hashMap.put("uName", myName);
-                    hashMap.put("pComments", "0");
+        hashMap.put("cId", timeStamp);
+        hashMap.put("comment", comment);
+        hashMap.put("timestamp", timeStamp);
+        hashMap.put("uid", myUid);
+        hashMap.put("uEmail", myEmail);
+        hashMap.put("uDp", myDp);
+        /*hashMap.put("uName", myName);*/
+        hashMap.put("uName", myName);
+        hashMap.put("pComments", "0");
 
-                    //put this data in db
-                    ref.child(timeStamp).setValue(hashMap)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    pd.dismiss();
-                                    Toast.makeText(PostDetailsActivity.this, "Comment Added...", Toast.LENGTH_SHORT).show();
-                                    commentEt.setText("");
-                                    updateCommentCount();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    pd.dismiss();
-                                    Toast.makeText(PostDetailsActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
+        //put this data in db
+        ref.child(timeStamp).setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        pd.dismiss();
+                        Toast.makeText(PostDetailsActivity.this, "Comment Added...", Toast.LENGTH_SHORT).show();
+                        commentEt.setText("");
+                        updateCommentCount();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        pd.dismiss();
+                        Toast.makeText(PostDetailsActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void updateCommentCount() {

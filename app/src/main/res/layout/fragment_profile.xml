@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,80 +26,80 @@
             </ImageView>
 
             <LinearLayout
-                    android:id="@+id/linearLayout"
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="100dp">
+
+                <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+                    android:id="@+id/avatarIv"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+
+                    android:padding="5dp"
+                    android:src="@drawable/ic_image_white"
+
+                    />
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="100dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:background="#80000000"
+                    >
 
-                    <com.blogspot.atifsoftwares.circularimageview.CircularImageView
-                        android:id="@+id/avatarIv"
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"
-
-                        android:padding="5dp"
-                        android:src="@drawable/ic_image_white"
-
-                        />
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/nameTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="10dp"
-                        android:background="#80000000"
-                        >
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="25sp"
+                        android:text="name"
+                        android:textColor="@color/colorAccent"
+                        android:layout_marginLeft="5dp"/>
 
-                        <TextView
-                            android:id="@+id/nameTv"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:textSize="25sp"
-                            android:text="name"
-                            android:textColor="@color/colorAccent"
-                            android:layout_marginLeft="5dp"/>
+                    <TextView
+                        android:id="@+id/emailTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="email"
+                        android:textColor="@color/colorAccent"
+                        android:layout_marginLeft="5dp"/>
 
-                        <TextView
-                            android:id="@+id/emailTv"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:text="email"
-                            android:textColor="@color/colorAccent"
-                            android:layout_marginLeft="5dp"/>
+                    <TextView
+                        android:id="@+id/phoneTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:text="phone"
+                        android:paddingBottom="4dp"
+                        android:textColor="@color/colorAccent" />
 
-                        <TextView
-                            android:id="@+id/phoneTv"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginLeft="5dp"
-                            android:text="phone"
-                            android:paddingBottom="4dp"
-                            android:textColor="@color/colorAccent" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="My Recent Posts ⬇"
+                        android:textSize="20sp"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:paddingTop="10dp"
+                        android:background="#f1eded"
+                        />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="My Recent Posts"
-                            android:textSize="20sp"
-                            android:textColor="#000000"
-                            android:textStyle="bold"
-                            android:textAlignment="center"
-                            android:paddingTop="10dp"
-                            android:background="#f1eded"
-                            />
-
-
-
-                    </LinearLayout>
 
 
                 </LinearLayout>
+
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recylerview_posts"
@@ -110,18 +111,46 @@
 
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fab"
-        android:background="@color/colorPrimary"
-        android:src="@drawable/ic_edit_white"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:layout_alignParentRight="true"
-        />
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        tools:context=".MainActivity">
+
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginBottom="69dp"
+            app:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/edit" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            app:backgroundTint="@color/colorPrimary"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="6dp"
+            android:src="@drawable/donate" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
