@@ -497,6 +497,7 @@ public class CreatePostFragment extends Fragment {
 
             String filePathAndName = "Posts/"+"post_" +timeStamp;
 
+
             if(imageIv.getDrawable()!=null){
                 //get image from imageview
                 Bitmap bitmap = ((BitmapDrawable)imageIv.getDrawable()).getBitmap();
@@ -630,6 +631,7 @@ public class CreatePostFragment extends Fragment {
                                 titleEt.setText("");
                                 descriptionEt.setText("");
                                 imageIv.setImageURI(null);
+                                Toast.makeText(createFragment, ""+imageIv, Toast.LENGTH_SHORT).show();
                                 image_pUri = null;
 
                                 startActivity(new Intent(createFragment, DashboardActivity.class));
