@@ -259,15 +259,12 @@ public class CreatePostFragment extends Fragment {
 
                         }
                     })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            pd.dismiss();
-                            Toast.makeText(createFragment, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    .addOnFailureListener(e -> {
+                        pd.dismiss();
+                        Toast.makeText(createFragment, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                            startActivity(new Intent(createFragment, DashboardActivity.class));
+                        startActivity(new Intent(createFragment, DashboardActivity.class));
 
-                        }
                     });
         }
 
