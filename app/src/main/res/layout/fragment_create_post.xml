@@ -42,8 +42,7 @@
             android:padding="10dp"
             android:layout_gravity="center"
             android:id="@+id/pImageIv"
-            android:src="@drawable/add_image"
-            android:tooltipText="Add Image"
+            android:background="@drawable/add_image"
             android:minHeight ="300dp"/>
 
         <Button
