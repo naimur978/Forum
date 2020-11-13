@@ -331,8 +331,8 @@ public class DashboardActivity extends AppCompatActivity implements DuoMenuView.
 
     @Override
     protected void onStart() {
-        checkUserStatus();
         super.onStart();
+        checkUserStatus();
     }
 
     public class ViewHolder {
