@@ -101,5 +101,5 @@ Details will be given as  soon as the project gets accomplished.
   </tr>
  </table>
 
-[PPT](presentation_files/ppt.ppt)
+[PPT](presentation_files/ppt.pptx)<br>
 [PDF](presentation_files/pdf.pdf)
